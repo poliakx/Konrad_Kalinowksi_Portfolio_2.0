@@ -63,7 +63,6 @@ export default function ContactPage() {
 
         <div className="mt-8 flex items-center justify-between border-t border-[#171310]/12 pt-4 text-[0.62rem] uppercase tracking-[0.22em] text-[#6f6257]">
           <p>Konrad Kalinowski</p>
-          <p>All Rights Reserved</p>
         </div>
       </div>
     </main>
