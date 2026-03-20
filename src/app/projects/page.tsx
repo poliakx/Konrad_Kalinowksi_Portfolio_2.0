@@ -22,22 +22,8 @@ export const metadata: Metadata = {
 
 export default function ProjectsPage() {
   return (
-    <section className="min-h-screen bg-[#f7f5f1] px-6 pb-20 pt-28 text-[#171310] md:px-10 md:pb-24">
+    <section className="min-h-screen bg-[#f7f5f1] px-6 pb-20 pt-24 text-[#171310] md:px-10 md:pb-24">
       <div className="mx-auto w-full max-w-7xl">
-        <div className="mb-12 flex flex-col gap-4 md:mb-16 md:flex-row md:items-end md:justify-between">
-          <div>
-            <p className="mb-3 text-[0.7rem] uppercase tracking-[0.32em] text-[#6f6257]">
-              Projects
-            </p>
-            <h1 className="max-w-3xl text-4xl font-light uppercase leading-[0.93] md:text-6xl">
-              Minimal portfolio, focused stories.
-            </h1>
-          </div>
-          <p className="max-w-md text-sm leading-7 text-[#5f5348] md:text-base">
-            Choose a project stream to explore the full gallery collections.
-          </p>
-        </div>
-
         <div className="grid gap-6 md:gap-8 lg:grid-cols-2">
           <Link
             href="/projects/food-photo"

@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export default function FooterShowcase() {
   return (
-    <section className="relative flex h-screen items-center overflow-hidden bg-[#f6f3ee] text-[#18130f]">
+    <section className="relative flex min-h-screen items-center overflow-hidden bg-[#f6f3ee] text-[#18130f]">
       <div className="absolute -left-14 top-24 h-56 w-56 rounded-full bg-[#dcc8b6]/45 blur-3xl" />
       <div className="absolute -right-16 bottom-12 h-72 w-72 rounded-full bg-[#cfb39a]/35 blur-3xl" />
 
@@ -22,9 +22,9 @@ export default function FooterShowcase() {
 
             <Link
               href="/projects"
-              className="mt-8 inline-flex items-center gap-3 border border-[#18130f]/20 bg-white px-5 py-3 text-[0.68rem] uppercase tracking-[0.28em] transition-colors hover:bg-[#18130f] hover:text-white"
+              className="mt-8 inline-flex items-center justify-center border border-[#18130f] bg-[#18130f] px-6 py-3 text-[0.68rem] uppercase tracking-[0.28em] text-white transition-colors hover:opacity-80"
             >
-              <span>Open Projects</span>
+              Open Projects
             </Link>
           </div>
 

@@ -24,16 +24,16 @@ export const metadata: Metadata = {
 
 export default function Home() {
   return (
-    <main id="home-scroll" className="h-screen overflow-y-scroll">
+    <main>
       <section className="h-screen">
         <HomeHero />
       </section>
 
-      <section id="slider-section" className="h-screen">
+      <section id="slider-section" className="min-h-screen">
         <PhotoSlider />
       </section>
 
-      <section id="footer-section" className="h-screen">
+      <section id="footer-section" className="min-h-screen">
         <FooterShowcase />
       </section>
     </main>

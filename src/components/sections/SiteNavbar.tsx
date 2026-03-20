@@ -19,11 +19,8 @@ export default function SiteNavbar() {
   const scrollHomeToTop = (event: ReactMouseEvent<HTMLAnchorElement>) => {
     if (pathname !== "/") return;
 
-    const scrollContainer = document.getElementById("home-scroll");
-    if (!scrollContainer) return;
-
     event.preventDefault();
-    scrollContainer.scrollTo({ top: 0, behavior: "auto" });
+    window.scrollTo({ top: 0, behavior: "auto" });
   };
 
   useEffect(() => {
@@ -34,11 +31,10 @@ export default function SiteNavbar() {
       return;
     }
 
-    const scrollContainer = document.getElementById("home-scroll");
     const sliderSection = document.getElementById("slider-section");
     const footerSection = document.getElementById("footer-section");
 
-    if (!scrollContainer || (!sliderSection && !footerSection)) {
+    if (!sliderSection && !footerSection) {
       setOnLightSection(false);
       return;
     }
@@ -58,11 +54,11 @@ export default function SiteNavbar() {
 
     updateNavbarState();
 
-    scrollContainer.addEventListener("scroll", updateNavbarState, { passive: true });
+    window.addEventListener("scroll", updateNavbarState, { passive: true });
     window.addEventListener("resize", updateNavbarState);
 
     return () => {
-      scrollContainer.removeEventListener("scroll", updateNavbarState);
+      window.removeEventListener("scroll", updateNavbarState);
       window.removeEventListener("resize", updateNavbarState);
     };
   }, [pathname]);
