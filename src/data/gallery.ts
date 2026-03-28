@@ -1,4 +1,4 @@
-import type { GalleryPhoto } from "@/src/components/gallery/PhotoGallery";
+import type { GalleryPhoto } from "@/src/components/gallery/gallery.types";
 
 type GalleryPhotoItem = {
   fileName: string;
