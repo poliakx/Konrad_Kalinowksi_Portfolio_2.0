@@ -1,16 +1,19 @@
-import Image from "next/image";
+// import Image from "next/image";
+"use client"
+import { CldImage } from "next-cloudinary";
 
 export default function HomeHero() {
   return (
-    <section className="relative h-screen w-full overflow-hidden bg-black">
+    <section className="relative w-full overflow-hidden bg-black aspect-[3/5] sm:aspect-[16/11] lg:aspect-[16/9] min-h-[70svh] max-h-screen">
 
       {/* IMAGE */}
-      <Image
-        src="/images/hero/konrad-kalinowski-food-hero1.jpg"
+      <CldImage
+        src="Artboard_1_jgoyzb"
         alt="Hero banner featuring styled food photography by Konrad Kalinowski"
         fill
+        sizes="100vw"
         priority
-        className="object-cover object-left"
+        className="object-cover object-[16%_center] sm:object-[30%_center] lg:object-[20%_center]"
       />
 
       {/* DARK OVERLAY */}
