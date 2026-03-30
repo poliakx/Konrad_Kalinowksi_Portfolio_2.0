@@ -38,7 +38,6 @@ export const foodGalleryPhotos = buildGalleryPhotos("food images", [
   { fileName: "KOKTAIL KONRAD.jpg", alt: "Craft cocktail portrait with cinematic styling" },
   { fileName: "KONRAD KOKTAI.jpg", alt: "Bar drink composition with moody atmosphere" },
   { fileName: "lalou tatar.jpg", alt: "Beef tartare plate styled for editorial menu" },
-  { fileName: "lalou tatar2 (2).jpg", alt: "Tartare close-up with textured garnish" },
   { fileName: "maciek.jpg", alt: "Chef-prepared dish with clean modern plating" },
   { fileName: "OLIWATB.jpg", alt: "Olive-toned dish composition with dark backdrop" },
   { fileName: "OLIWATB1.jpg", alt: "Refined plate detail in restaurant ambiance" },

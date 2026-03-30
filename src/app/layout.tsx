@@ -32,9 +32,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="bg-black text-white">
+      <body className="flex min-h-screen flex-col bg-black text-white">
         <SiteNavbar />
-        <main>{children}</main>
+        <main className="flex flex-1 flex-col">{children}</main>
         <SiteFooter />
       </body>
     </html>
