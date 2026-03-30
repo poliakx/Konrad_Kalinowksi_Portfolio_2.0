@@ -25,9 +25,7 @@ export default function HomeHero() {
         {/* TEXT BLOCK */}
         <div className="max-w-[900px] text-right text-white">
 
-          <p className="tracking-[0.4em] text-[0.6rem] md:text-xs mb-4 text-neutral-300">
-            KONRAD KALINOWSKI
-          </p>
+          
 
           <h1 className="
             font-light
@@ -35,12 +33,15 @@ export default function HomeHero() {
             text-[clamp(2rem,5vw,5rem)]
             uppercase
           ">
-            Food <br />
-            Photography
+            Konrad <br />
+            Kalinowski
           </h1>
+          <p className="tracking-[0.4em] text-[0.6rem] md:text-xs mb-4 text-neutral-300">
+            Photography
+          </p>
 
           <p className="mt-6 tracking-[0.3em] text-[0.6rem] md:text-xs text-neutral-300">
-            FOR RESTAURANTS, CAFES AND BARS
+            FOOD, DRINKS & PEOPLE
           </p>
 
         </div>

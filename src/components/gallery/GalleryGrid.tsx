@@ -20,15 +20,16 @@ export default function GalleryGrid({ photos, onPhotoClick }: GalleryGridProps) 
             aria-label={`Open ${photo.alt}`}
           >
             <div className="relative h-full w-full">
-              <Image
-                src={photo.src}
-                alt={photo.alt}
-                fill
-                loading="lazy"
-                decoding="async"
-                className="object-cover transition-transform duration-500 group-hover:scale-105"
-                sizes="(max-width: 640px) 100vw, (max-width: 1279px) 50vw, 25vw"
-              />
+                 <Image
+                   src={photo.src}
+                   alt={photo.alt}
+                   fill
+                   loading={index === 0 ? "eager" : "lazy"}
+                   priority={index === 0}
+                   decoding="async"
+                   className="object-cover transition-transform duration-500 group-hover:scale-105"
+                   sizes="(max-width: 640px) 100vw, (max-width: 1279px) 50vw, 25vw"
+                 />
               <div className="absolute inset-0 bg-gradient-to-t from-black/35 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
             </div>
           </button>

@@ -112,7 +112,8 @@ export default function LightboxModal({
             src={activePhoto.src}
             alt={activePhoto.alt}
             fill
-            onLoadingComplete={(img) => {
+            onLoad={(e) => {
+              const img = e.currentTarget as HTMLImageElement;
               setImageNaturalSize({
                 width: img.naturalWidth,
                 height: img.naturalHeight,
