@@ -15,6 +15,7 @@ const navItems = [
 export default function SiteNavbar() {
   const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
+  const [menuAnimating, setMenuAnimating] = useState(false);
   const [onLightSection, setOnLightSection] = useState(false);
 
   const scrollHomeToTop = (event: ReactMouseEvent<HTMLAnchorElement>) => {
@@ -79,15 +80,28 @@ export default function SiteNavbar() {
     };
   }, [menuOpen]);
 
+  // handle open/close with animation
+  const openMenu = () => {
+    setMenuOpen(true);
+    // allow the element to mount before starting animation
+    requestAnimationFrame(() => setMenuAnimating(true));
+  };
+
+  const closeMenu = () => {
+    setMenuAnimating(false);
+    // unmount after animation completes (match duration 300ms)
+    setTimeout(() => setMenuOpen(false), 320);
+  };
+
   return (
     <>
       <header
-        className={`fixed top-0 left-0 z-50 w-full transition-all duration-300 ${
+        className={`fixed top-0 left-0 z-50 w-full h-[10vh] transition-all duration-300 ${
           onLightSection ? "bg-white text-black shadow-sm" : "bg-transparent text-white"
         }`}
       >
-        <div className="mx-auto max-w-7xl px-6 py-6">
-          <div className="relative flex items-center justify-between">
+        <div className="mx-auto max-w-7xl px-6 h-full flex items-center">
+          <div className="relative flex items-center justify-between w-full">
 
             {/* LOGO (desktop) */}
             <Link href="/" onClick={scrollHomeToTop} className="text-sm font-light uppercase tracking-[0.35em] hidden md:inline-block">
@@ -114,8 +128,14 @@ export default function SiteNavbar() {
             {/* MOBILE BAR: Hamburger (left), Home (center), Instagram (right) */}
             <div className="flex w-full items-center md:hidden">
               <div className="flex-shrink-0">
+                <Link href="/" onClick={scrollHomeToTop} className="text-sm uppercase tracking-[0.2em] hover:opacity-70 transition">
+                  Logo
+                </Link>
+              </div>
+
+              <div className="ml-8 flex-shrink-0">
                 <button
-                  onClick={() => setMenuOpen((s) => !s)}
+                  onClick={() => (menuOpen ? closeMenu() : openMenu())}
                   aria-label={menuOpen ? "Close menu" : "Open menu"}
                   className="inline-flex items-center gap-2 rounded-md px-3 py-2 text-sm"
                 >
@@ -128,22 +148,7 @@ export default function SiteNavbar() {
                 </button>
               </div>
 
-              <div className="flex-1 flex justify-center">
-                <Link href="/" onClick={scrollHomeToTop} className="text-sm uppercase tracking-[0.2em]">
-                  Home
-                </Link>
-              </div>
-
-              <div className="flex-shrink-0">
-                <Link
-                  href="https://www.instagram.com/_konradkalinowski.photo/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="hover:opacity-70 transition"
-                >
-                  <Instagram size={22} strokeWidth={1.5} />
-                </Link>
-              </div>
+              <div className="flex-1" />
             </div>
 
             {/* INSTAGRAM (desktop) */}
@@ -161,35 +166,57 @@ export default function SiteNavbar() {
 
       {/* Overlay menu (mobile) */}
       {menuOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 text-white backdrop-blur-sm">
-          <div className="absolute top-6 right-6">
-            <button onClick={() => setMenuOpen(false)} aria-label="Close menu" className="px-3 py-2 text-white">
-              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M3 3L17 17" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-                <path d="M17 3L3 17" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-              </svg>
-            </button>
-          </div>
+        <div className={`fixed inset-0 z-50 flex items-start justify-start bg-black/70 text-white backdrop-blur-sm transition-opacity duration-300 ${menuAnimating ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}>
+          <div className={`w-[85vw] sm:w-[80vw] md:w-[75vw] max-w-none bg-black/80 text-white h-full p-6 relative transform transition-transform duration-300 ${menuAnimating ? 'translate-x-0' : '-translate-x-full'}`}>
+              <nav className="h-full flex items-start pt-12 relative w-max">
+                  <ul className="flex flex-col space-y-6 text-sm uppercase tracking-[0.2em] text-left">
+                  {navItems.map((item) => (
+                    <li key={item.href}>
+                      <Link
+                        href={item.href}
+                        onClick={(e) => {
+                          if (item.label === "Home") scrollHomeToTop(e as any);
+                          setMenuOpen(false);
+                        }}
+                        className={`block ${item.label === "Home" ? "opacity-100" : "opacity-60"}`}
+                      >
+                        {item.label}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
 
-          <div className="w-1/4 flex items-center justify-center h-full">
-            <ul className="flex flex-col items-center justify-center gap-6 text-xl uppercase tracking-[0.2em] text-center">
-              {navItems.map((item) => (
-                <li key={item.href}>
-                  <Link
-                    href={item.href}
-                    onClick={(e) => {
-                      if (item.label === "Home") scrollHomeToTop(e as any);
-                      setMenuOpen(false);
-                    }}
-                    className="block text-center"
-                  >
-                    {item.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
+                <button
+                  onClick={() => closeMenu()}
+                  aria-label="Close menu"
+                  className="absolute top-2 right-0 translate-x-6 px-3 py-2 text-white"
+                >
+                  <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M3 3L17 17" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+                    <path d="M17 3L3 17" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+                  </svg>
+                </button>
+              </nav>
+              <div className="absolute bottom-6 left-6 right-6 flex items-center gap-4">
+                <a
+                  href="https://www.instagram.com/_konradkalinowski.photo/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Instagram"
+                  className="hover:opacity-80 transition w-10 h-10 flex items-center justify-center rounded-md"
+                >
+                  <Instagram size={24} strokeWidth={1.6} />
+                </a>
+
+                <Link href="/contact" aria-label="Contact" className="hover:opacity-80 transition w-10 h-10 flex items-center justify-center rounded-md">
+                  <svg width="22" height="18" viewBox="0 0 20 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M1 2.5A1.5 1.5 0 0 1 2.5 1h15A1.5 1.5 0 0 1 19 2.5v11A1.5 1.5 0 0 1 17.5 15h-15A1.5 1.5 0 0 1 1 13.5v-11z" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"/>
+                    <path d="M2 3.5l7 5 7-5" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"/>
+                  </svg>
+                </Link>
+              </div>
+            </div>
           </div>
-        </div>
       )}
     </>
   );
