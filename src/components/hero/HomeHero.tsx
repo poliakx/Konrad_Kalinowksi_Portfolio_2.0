@@ -4,7 +4,7 @@ import { CldImage } from "next-cloudinary";
 
 export default function HomeHero() {
   return (
-    <section className="relative w-full overflow-hidden bg-black min-h-screen sm:aspect-[16/11] lg:aspect-[16/9] px-6 sm:px-10 md:px-20 lg:px-24">
+    <section className="relative w-full overflow-hidden bg-black min-h-screen px-6 sm:px-10 md:px-20 lg:px-24">
 
       {/* IMAGE */}
       <CldImage
@@ -13,7 +13,7 @@ export default function HomeHero() {
         fill
         sizes="100vw"
         priority
-        className="object-cover object-center sm:object-[30%_center] lg:object-[20%_center]"
+        className="object-cover object-[40%_center] sm:object-[20%_center] lg:object-[0%_center]"
       />
 
       {/* DARK OVERLAY */}
