@@ -1,10 +1,23 @@
-// import Image from "next/image";
+
 "use client"
+import { useEffect } from "react";
 import { CldImage } from "next-cloudinary";
 
 export default function HomeHero() {
+  useEffect(() => {
+    const setVh = () => {
+      document.documentElement.style.setProperty('--vh', `${window.innerHeight / 100}px`);
+    };
+    setVh();
+    window.addEventListener('resize', setVh);
+    return () => window.removeEventListener('resize', setVh);
+  }, []);
+
   return (
-    <section className="relative w-full overflow-hidden bg-black min-h-screen px-6 sm:px-10 md:px-20 lg:px-24">
+    <section
+      className="relative w-full overflow-hidden bg-black px-6 sm:px-10 md:px-20 lg:px-24"
+      style={{ height: 'calc(var(--vh, 1vh) * 100)' }}
+    >
 
       {/* IMAGE */}
       <CldImage
