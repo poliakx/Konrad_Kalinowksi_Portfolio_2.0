@@ -20,21 +20,21 @@ export default function HomeHero() {
       <div className="absolute inset-0 bg-black/40" />
 
       {/* CONTENT CONTAINER */}
-      <div className="absolute inset-0 z-10 flex items-center justify-center">
+      <div className="absolute inset-0 z-10 flex items-center justify-center sm:justify-end">
 
         {/* TEXT BLOCK */}
-        <div className="max-w-[900px] mx-auto text-right text-white md:pr-0">
+        <div className="max-w-[900px] mx-auto text-right text-white sm:pr-[5%] md:pr-0 transform lg:mx-0 lg:absolute lg:top-1/2 lg:right-[8%] lg:-translate-y-1/2">
 
-          <h1 className="font-light leading-[0.9] text-5xl sm:text-6xl lg:text-7xl uppercase">
+          <h1 className="font-light leading-[0.9] text-5xl sm:text-[clamp(3rem,8vw,5rem)] lg:text-[clamp(2rem,5vw,5rem)] uppercase">
             Konrad <br />
             Kalinowski
           </h1>
 
-          <p className="tracking-[0.4em] text-white/70 text-xs sm:text-sm mb-4">
+          <p className="tracking-[0.4em] text-white/70 text-xs sm:text-sm md:text-sm mb-4 sm:text-neutral-500">
             Photography
           </p>
 
-          <p className="mt-6 tracking-[0.3em] text-xs sm:text-sm text-neutral-300">
+          <p className="mt-6 tracking-[0.3em] text-xs sm:text-sm md:text-xs text-neutral-300">
             FOOD, DRINKS & PEOPLE
           </p>
 
