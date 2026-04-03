@@ -96,8 +96,8 @@ export default function SiteNavbar() {
   return (
     <>
       <header
-        className={`sticky top-0 left-0 z-50 w-full min-h-16 transition-all duration-300 ${
-          onLightSection ? "bg-white text-black shadow-sm" : "bg-transparent text-white"
+        className={`fixed top-0 left-0 z-50 w-full h-16 justify-center transition-all duration-300 ${
+          onLightSection ? "bg-white text-black shadow-sm" : "bg-black text-white"
         }`}
       >
         <div className="mx-auto max-w-7xl px-6 h-full flex items-center">

@@ -1,6 +1,7 @@
 
 "use client"
 import { useEffect } from "react";
+import Link from "next/link";
 import { CldImage } from "next-cloudinary";
 
 export default function HomeHero() {
@@ -50,6 +51,16 @@ export default function HomeHero() {
           <p className="mt-6 tracking-[0.3em] text-xs sm:text-sm md:text-xs text-neutral-300">
             FOOD, DRINKS & PEOPLE
           </p>
+
+          {/* Mobile-only: Open Projects button (smaller, lower, transparent, white text and border) */}
+          <div className="mt-8 sm:hidden flex justify-end">
+            <Link
+              href="/projects"
+              className="inline-flex items-center justify-center border border-white bg-transparent px-6 py-2 text-sm uppercase tracking-[0.18em] text-white transition-opacity hover:opacity-80"
+            >
+              Open Projects
+            </Link>
+          </div>
 
         </div>
 
