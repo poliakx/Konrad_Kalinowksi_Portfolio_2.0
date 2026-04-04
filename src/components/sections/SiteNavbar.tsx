@@ -97,7 +97,7 @@ export default function SiteNavbar() {
     <>
       <header
         className={`fixed top-0 left-0 z-50 w-full h-16 justify-center transition-all duration-300 ${
-          onLightSection ? "bg-white text-black shadow-sm" : "bg-black text-white"
+          onLightSection ? "bg-white text-black shadow-sm" : "bg-transparent text-white"
         }`}
       >
         <div className="mx-auto max-w-7xl px-6 h-full flex items-center">
@@ -167,9 +167,9 @@ export default function SiteNavbar() {
       {/* Overlay menu (mobile) */}
       {menuOpen && (
         <div className={`fixed inset-0 z-50 flex items-start justify-start bg-black/70 text-white backdrop-blur-sm transition-opacity duration-300 ${menuAnimating ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}>
-          <div className={`w-[85vw] sm:w-[80vw] md:w-[75vw] max-w-none bg-black/80 text-white h-full p-6 relative transform transition-transform duration-300 ${menuAnimating ? 'translate-x-0' : '-translate-x-full'}`}>
-              <nav className="h-full flex items-start pt-12 relative w-max">
-                  <ul className="flex flex-col space-y-6 text-sm uppercase tracking-[0.2em] text-left">
+          <div className={`w-[70vw] sm:w-[80vw] md:w-[90vw] max-w-none bg-black/80 text-white h-full p-6 relative transform transition-transform duration-300 ${menuAnimating ? 'translate-x-0' : '-translate-x-full'}`}>
+              <nav className="h-full flex items-start pt-18 relative w-max">
+                  <ul className="flex flex-col space-y-6 text-sm uppercase tracking-[0.2em] text-right">
                   {navItems.map((item) => (
                     <li key={item.href}>
                       <Link

@@ -20,7 +20,7 @@ body {
 
 @keyframes slide {
   0%   { transform: translateX(0); }
-  100% { transform: translateX(calc(-36vw * 4 - 1.5rem * 4)); }
+  100% { transform: translateX(-50%); }
 }
 
 .slider-track {

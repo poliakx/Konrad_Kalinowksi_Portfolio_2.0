@@ -34,7 +34,7 @@ export default function HomeHero() {
       <div className="absolute inset-0 bg-black/40" />
 
       {/* CONTENT CONTAINER */}
-      <div className="absolute inset-0 z-10 flex items-center justify-center sm:justify-end">
+      <div className="absolute inset-0 z-10 flex items-center justify-end">
 
         {/* TEXT BLOCK */}
         <div className="max-w-[900px] mx-auto text-right text-white sm:pr-[5%] md:pr-0 transform lg:mx-0 lg:absolute lg:top-1/2 lg:right-[8%] lg:-translate-y-1/2">
