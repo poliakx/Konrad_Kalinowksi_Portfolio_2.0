@@ -25,7 +25,7 @@ export const metadata: Metadata = {
 export default function Home() {
   return (
     <main>
-      <section className="h-screen">
+      <section style={{ height: 'calc(var(--vh, 1vh) * 100)' }}>
         <HomeHero />
       </section>
 
