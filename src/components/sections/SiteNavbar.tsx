@@ -33,13 +33,9 @@ export default function SiteNavbar() {
       return;
     }
 
+    const heroSection = document.getElementById("hero-section");
     const sliderSection = document.getElementById("slider-section");
     const footerSection = document.getElementById("footer-section");
-
-    if (!sliderSection && !footerSection) {
-      setOnLightSection(false);
-      return;
-    }
 
     const isCenterInside = (element: HTMLElement) => {
       const rect = element.getBoundingClientRect();
@@ -48,6 +44,14 @@ export default function SiteNavbar() {
     };
 
     const updateNavbarState = () => {
+      // If hero exists, consider navbar "light" when NOT over the hero
+      if (heroSection) {
+        const onHero = isCenterInside(heroSection);
+        setOnLightSection(!onHero);
+        return;
+      }
+
+      // fallback: keep previous behavior (light on slider/footer)
       const onSlider = sliderSection ? isCenterInside(sliderSection) : false;
       const onFooter = footerSection ? isCenterInside(footerSection) : false;
 

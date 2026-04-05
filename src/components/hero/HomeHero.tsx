@@ -15,7 +15,7 @@ export default function HomeHero() {
   }, []);
 
   return (
-    <section
+    <section id="hero-section"
       className="relative w-full overflow-hidden bg-black px-6 sm:px-10 md:px-20 lg:px-24"
       style={{ height: 'calc(var(--vh, 1vh) * 100)' }}
     >

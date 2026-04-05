@@ -25,17 +25,9 @@ export const metadata: Metadata = {
 export default function Home() {
   return (
     <main>
-      <section style={{ height: 'calc(var(--vh, 1vh) * 100)' }}>
-        <HomeHero />
-      </section>
-
-      <section id="slider-section" className="min-h-screen">
-        <PhotoSlider />
-      </section>
-
-      <section id="footer-section" className="min-h-screen">
-        <FooterShowcase />
-      </section>
+      <HomeHero />
+      <PhotoSlider />
+      <FooterShowcase />
     </main>
   );
 }
