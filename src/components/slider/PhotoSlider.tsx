@@ -25,87 +25,11 @@ export default function PhotoSlider() {
   const duplicatedPhotos = [...photos, ...photos];
 
   const trackRef = useRef<HTMLDivElement | null>(null);
-  const isDragging = useRef(false);
-  const startX = useRef(0);
-  const startY = useRef(0);
-  const startScroll = useRef(0);
   const rafRef = useRef<number | null>(null);
   const lastTs = useRef<number | null>(null);
-  const pauseUntil = useRef<number>(0);
   const SPEED_PX_PER_SEC = 40; // adjust auto-scroll speed
-  const PAUSE_AFTER_INTERACTION_MS = 1200;
-  const activePointerId = useRef<number | null>(null);
-  const verticalScroll = useRef(false);
 
-  const handlePointerDown = (e: React.PointerEvent<HTMLDivElement>) => {
-    const el = trackRef.current;
-    if (!el) return;
-    // record start positions; decide intent on move
-    startX.current = e.clientX;
-    startY.current = e.clientY;
-    startScroll.current = el.scrollLeft;
-    activePointerId.current = e.pointerId;
-    verticalScroll.current = false;
-    pauseUntil.current = Date.now() + PAUSE_AFTER_INTERACTION_MS;
-  };
-
-  const handlePointerMove = (e: React.PointerEvent<HTMLDivElement>) => {
-    const el = trackRef.current;
-    if (!el) return;
-
-    const dx = e.clientX - startX.current;
-    const dy = e.clientY - startY.current;
-    const absDx = Math.abs(dx);
-    const absDy = Math.abs(dy);
-    const THRESH = 6;
-
-    // If not yet dragging and not decided, determine intent
-    if (!isDragging.current && !verticalScroll.current) {
-      if (absDx > absDy && absDx > THRESH) {
-        // start horizontal dragging
-        isDragging.current = true;
-        try {
-          el.setPointerCapture(e.pointerId);
-          activePointerId.current = e.pointerId;
-        } catch {}
-        // reset start for smooth drag
-        startX.current = e.clientX;
-        startScroll.current = el.scrollLeft;
-      } else if (absDy > absDx && absDy > THRESH) {
-        // vertical gesture -> let browser handle scrolling
-        verticalScroll.current = true;
-        try {
-          el.releasePointerCapture(e.pointerId);
-        } catch {}
-        return;
-      } else {
-        return;
-      }
-    }
-
-    if (isDragging.current) {
-      const walk = (e.clientX - startX.current) * 1; // sensitivity
-      el.scrollLeft = startScroll.current - walk;
-      e.preventDefault();
-      pauseUntil.current = Date.now() + PAUSE_AFTER_INTERACTION_MS;
-    }
-  };
-
-  const stopDragging = (e?: React.PointerEvent<HTMLDivElement>) => {
-    if (!isDragging.current && !activePointerId.current) return;
-    isDragging.current = false;
-    verticalScroll.current = false;
-    const el = trackRef.current;
-    if (!el) return;
-    const pid = e?.pointerId ?? activePointerId.current;
-    if (pid != null) {
-      try {
-        el.releasePointerCapture(pid);
-      } catch {}
-    }
-    activePointerId.current = null;
-    pauseUntil.current = Date.now() + PAUSE_AFTER_INTERACTION_MS;
-  };
+  
 
   useEffect(() => {
     const step = (ts: number) => {
@@ -114,7 +38,7 @@ export default function PhotoSlider() {
       lastTs.current = ts;
 
       const el = trackRef.current;
-      if (el && !isDragging.current && Date.now() > pauseUntil.current) {
+      if (el) {
         const distance = SPEED_PX_PER_SEC * dt;
         el.scrollLeft += distance;
 
@@ -146,13 +70,8 @@ export default function PhotoSlider() {
 
         <div
           ref={trackRef}
-          className="flex w-max items-center gap-6 overflow-x-auto"
-          style={{ scrollBehavior: 'auto', WebkitOverflowScrolling: 'touch', touchAction: 'pan-y' }}
-          onPointerDown={handlePointerDown}
-          onPointerMove={handlePointerMove}
-          onPointerUp={stopDragging}
-          onPointerCancel={stopDragging}
-          onPointerLeave={stopDragging}
+          className="flex w-max items-center gap-6 overflow-x-hidden"
+          style={{ scrollBehavior: 'auto' }}
         >
           {duplicatedPhotos.map((photo, index) => (
             <div
