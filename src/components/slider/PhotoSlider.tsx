@@ -3,6 +3,10 @@
 import Image from "next/image";
 import { useRef, useEffect } from "react";
 
+// Auto-enable the auto-scroll while in development (localhost).
+// Toggle to `false` to disable the auto-scroll while debugging on device.
+const ENABLE_AUTO_SCROLL = true;
+
 const SPEED_PX_PER_SEC = 40;
 
 const photos = [
@@ -31,6 +35,8 @@ export default function PhotoSlider() {
   const lastTs = useRef<number | null>(null);
 
   useEffect(() => {
+    if (!ENABLE_AUTO_SCROLL) return;
+
     const step = (ts: number) => {
       if (lastTs.current === null) lastTs.current = ts;
 
@@ -61,19 +67,31 @@ export default function PhotoSlider() {
     };
   }, []);
 
+  // Set --vh CSS variable to handle mobile browser chrome (address bar) resizing.
+  useEffect(() => {
+    const setVh = () =>
+      document.documentElement.style.setProperty(
+        "--vh",
+        `${window.innerHeight * 0.01}px`
+      );
+    setVh();
+    window.addEventListener("resize", setVh);
+    return () => window.removeEventListener("resize", setVh);
+  }, []);
+
   return (
     <section
       className="relative overflow-hidden bg-[#f6f3ee] text-black"
       style={{ height: "calc(var(--vh, 1vh) * 100)", minHeight: "60vh" }}
     >
       <div className="relative flex h-full items-center px-6 md:px-12">
-        <div className="pointer-events-none absolute left-0 top-0 z-10 h-full w-24 bg-gradient-to-r from-[#f6f3ee] to-transparent" />
-        <div className="pointer-events-none absolute right-0 top-0 z-10 h-full w-24 bg-gradient-to-l from-[#f6f3ee] to-transparent" />
+        <div className="hidden md:block pointer-events-none absolute left-0 top-0 z-10 h-full w-24 bg-gradient-to-r from-[#f6f3ee] to-transparent" />
+        <div className="hidden md:block pointer-events-none absolute right-0 top-0 z-10 h-full w-24 bg-gradient-to-l from-[#f6f3ee] to-transparent" />
 
         <div
           ref={trackRef}
           className="flex w-max items-center gap-6 overflow-hidden"
-          style={{ scrollBehavior: "auto" }}
+          style={{ scrollBehavior: "auto", WebkitOverflowScrolling: "touch", overscrollBehavior: "auto" }}
         >
           {duplicatedPhotos.map((photo, index) => (
             <div
