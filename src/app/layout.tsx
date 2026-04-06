@@ -1,5 +1,6 @@
 import SiteNavbar from "@/src/components/sections/SiteNavbar";
 import SiteFooter from "@/src/components/sections/SiteFooter";
+import SetVh from "@/src/components/SetVh";
 import type { Metadata } from "next";
 import "./globals.css";
 
@@ -33,6 +34,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="flex min-h-screen flex-col bg-black text-white">
+        <SetVh />
         <SiteNavbar />
         <main className="flex flex-1 flex-col">{children}</main>
         <SiteFooter />

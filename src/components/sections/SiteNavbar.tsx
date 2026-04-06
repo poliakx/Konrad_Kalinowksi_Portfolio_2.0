@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, type MouseEvent as ReactMouseEvent } from "react";
+import { useEffect, useState, useRef, type MouseEvent as ReactMouseEvent } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Instagram } from "lucide-react";
@@ -43,11 +43,28 @@ export default function SiteNavbar() {
       return rect.top <= viewportCenter && rect.bottom >= viewportCenter;
     };
 
+    const pending = { timer: null as number | null, lastDesired: null as boolean | null };
+
+    const scheduleSet = (desired: boolean) => {
+      // if already scheduled for same desired state, keep it
+      if (pending.lastDesired === desired && pending.timer) return;
+      // clear existing
+      if (pending.timer) {
+        window.clearTimeout(pending.timer);
+        pending.timer = null;
+      }
+      pending.lastDesired = desired;
+      pending.timer = window.setTimeout(() => {
+        setOnLightSection(desired);
+        pending.timer = null;
+      }, 180);
+    };
+
     const updateNavbarState = () => {
       // If hero exists, consider navbar "light" when NOT over the hero
       if (heroSection) {
         const onHero = isCenterInside(heroSection);
-        setOnLightSection(!onHero);
+        scheduleSet(!onHero);
         return;
       }
 
@@ -55,7 +72,7 @@ export default function SiteNavbar() {
       const onSlider = sliderSection ? isCenterInside(sliderSection) : false;
       const onFooter = footerSection ? isCenterInside(footerSection) : false;
 
-      setOnLightSection(onSlider || onFooter);
+      scheduleSet(onSlider || onFooter);
     };
 
     updateNavbarState();
@@ -66,6 +83,7 @@ export default function SiteNavbar() {
     return () => {
       window.removeEventListener("scroll", updateNavbarState);
       window.removeEventListener("resize", updateNavbarState);
+      if (pending.timer) window.clearTimeout(pending.timer);
     };
   }, [pathname]);
 

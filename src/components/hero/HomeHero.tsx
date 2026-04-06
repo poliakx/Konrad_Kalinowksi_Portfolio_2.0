@@ -6,18 +6,12 @@ import { CldImage } from "next-cloudinary";
 
 export default function HomeHero() {
   useEffect(() => {
-    const setVh = () => {
-      document.documentElement.style.setProperty('--vh', `${window.innerHeight / 100}px`);
-    };
-    setVh();
-    window.addEventListener('resize', setVh);
-    return () => window.removeEventListener('resize', setVh);
+    // `--vh` is handled centrally by `SetVh` in the layout; no local effect needed.
   }, []);
 
   return (
     <section id="hero-section"
-      className="relative w-full overflow-hidden bg-black px-6 sm:px-10 md:px-20 lg:px-24"
-      style={{ height: 'calc(var(--vh, 1vh) * 100)' }}
+      className="relative w-full overflow-hidden bg-black px-6 sm:px-10 md:px-20 lg:px-24 min-h-screen"
     >
 
       {/* IMAGE */}
