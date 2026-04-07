@@ -100,7 +100,7 @@ export default function PhotoSlider() {
     return (
     <section
       id="slider-section"
-      className="relative overflow-hidden bg-[#f6f3ee] text-black min-h-screen pt-4 pb-6 md:pt-[7rem] md:pb-12 lg:pt-32 lg:pb-16"
+      className="relative flex min-h-[100svh] items-center overflow-hidden bg-[#f6f3ee] text-black py-10 sm:py-12 md:py-0 md:pt-[7rem] md:pb-12 lg:pt-32 lg:pb-16"
     >
       <div className="relative flex h-full items-center justify-center md:justify-start px-6 md:px-12">
         <div className="hidden md:block pointer-events-none absolute left-0 top-0 z-10 h-full w-24 bg-gradient-to-r from-[#f6f3ee] to-transparent" />
@@ -115,7 +115,7 @@ export default function PhotoSlider() {
             {duplicatedPhotos.map((photo, index) => (
               <div
                 key={`${photo.src}-${index}`}
-                className="relative h-[50vh] w-[80vw] shrink-0 overflow-hidden sm:w-[48vw] md:aspect-[4/3] md:h-[72vh] md:w-[36vw]"
+                className="relative w-[80vw] aspect-[3/4] shrink-0 overflow-hidden sm:w-[48vw] md:aspect-[4/3] md:h-[72vh] md:w-[36vw]"
                 style={{ minHeight: "220px" }}
               >
                 <Image
