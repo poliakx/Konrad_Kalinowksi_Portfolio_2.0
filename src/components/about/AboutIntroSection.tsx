@@ -4,47 +4,46 @@ import { CldImage } from "next-cloudinary";
 
 export default function AboutIntroSection() {
   return (
-    <section className="flex flex-1 items-center bg-[#f7f5f1] text-[#171310]">
-      <div className="mx-auto grid w-full max-w-[1180px] grid-cols-1 items-center gap-6 px-8 pb-12 pt-28 sm:px-12 lg:grid-cols-[0.9fr_1.1fr] lg:gap-12 lg:px-16 lg:pb-12 lg:pt-28 xl:px-20">
-        <div className="flex items-center">
-          <div className="max-w-[420px]">
-            <p className="text-[0.68rem] uppercase tracking-[0.28em] text-[#6f655c]">
-              About Me
-            </p>
-
-            <h1 className="mt-4 max-w-[13ch] text-[clamp(1.7rem,3.2vw,2.9rem)] font-light leading-[1.02] text-[#171310]">
-              Visual Storytelling
-            </h1>
-
-            <p className="mt-5 max-w-[38ch] text-[clamp(0.86rem,0.9vw,0.96rem)] leading-[1.55] text-[#3f3934]">
-              I am Konrad Kalinowski, a photographer focused on food, hospitality,
-              and editorial visual work. I build clean compositions where texture,
-              light, and atmosphere tell the story before a single word appears.
-            </p>
-
-            <p className="mt-3 max-w-[38ch] text-[clamp(0.86rem,0.9vw,0.96rem)] leading-[1.55] text-[#3f3934]">
-              My approach is minimal and intentional: every frame should feel
-              precise, emotional, and modern, while still true to the personality
-              of the brand behind it.
-            </p>
-
-            <p className="mt-6 text-[0.66rem] uppercase tracking-[0.22em] text-[#171310]">
-              Konrad
-            </p>
+    <section className="min-h-screen flex items-center justify-center bg-[#f6f3ee] py-12 px-6">
+      <div className="w-full max-w-5xl">
+        <div className="bg-white rounded-2xl shadow-[0_10px_30px_rgba(16,24,40,0.08)] overflow-hidden md:flex md:items-stretch">
+          {/* Image column */}
+          <div className="md:w-1/2 bg-gray-50 flex items-center justify-center p-6">
+            <div className="w-full h-[56vw] sm:h-[48vw] rounded-lg overflow-hidden relative md:max-w-[520px] md:w-[520px] md:aspect-square">
+              <CldImage
+                src="ZDJECIEKONRAD_ycdawd"
+                alt="Konrad Kalinowski holding a camera"
+                fill
+                priority
+                sizes="(max-width: 1024px) 45vw, 520px"
+                className="object-cover"
+              />
+            </div>
           </div>
-        </div>
 
-        <div className="flex h-full justify-start lg:justify-center">
-          <div className="relative aspect-square w-full max-w-[400px] lg:max-w-[430px]">
-          <CldImage
-            src="Artboard_1_jgoyzb"
-            alt="Konrad Kalinowski holding a camera in an open field"
-            fill
-            priority
-            sizes="(max-width: 1024px) min(100vw - 4rem, 400px), 430px"
-            className="object-cover object-[58%_center]"
-          />
+          {/* Text column */}
+          <div className="md:w-1/2 p-6 md:p-12 flex items-center">
+            <div className="w-full">
+              <h1 className="text-3xl md:text-5xl font-light leading-tight text-[#171310] mb-4">
+                 Hello there!
+              </h1>
 
+              <p className="text-base md:text-xl font-medium text-[#171310] max-w-[42ch] mb-4">
+                 I am Konrad Kalinowski. In my photography, I focus on the story of the place, the details, and the identity of the venue — images that not only resonate with regular guests but also capture the attention of new ones.
+              </p>
+
+              <p className="text-sm leading-relaxed text-[#53483f] max-w-[56ch] mb-4">
+                 Whether you want to improve your menu, strengthen your social media presence, or build a cohesive visual identity, photography is a powerful tool that highlights your culinary skills and supports the growth of your business. I’d love to tell the story of your place through tailored food photography.
+              </p>
+
+              <p className="text-sm leading-relaxed text-[#53483f] max-w-[56ch] mb-6">
+                 <strong>Why me?</strong> Because I combine the experience of a professional chef with the work of a photographer, I truly understand the needs of restaurateurs when it comes to capturing the perfect shot.
+              </p>
+
+              <div>
+                <a href="/contact" className="w-full md:w-auto text-center rounded-full border border-[#171310] text-[#171310] px-6 py-3 text-sm hover:opacity-90 transition md:bg-[#171310] md:text-white">Get in touch</a>
+              </div>
+            </div>
           </div>
         </div>
       </div>

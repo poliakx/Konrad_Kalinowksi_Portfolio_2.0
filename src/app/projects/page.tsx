@@ -22,7 +22,9 @@ export const metadata: Metadata = {
 
 export default function ProjectsPage() {
   return (
-    <section className="min-h-screen bg-[#f7f5f1] px-6 pb-20 pt-24 text-[#171310] md:px-10 md:pb-24">
+    <section
+      className="bg-[#f7f5f1] px-6 text-[#171310] md:px-10 min-h-[calc(100svh-(6rem+env(safe-area-inset-top)))] pt-[calc(6rem+env(safe-area-inset-top))] pb-4 md:pt-24 md:min-h-auto md:pb-24"
+    >
       <div className="mx-auto w-full max-w-7xl">
         <div className="grid gap-6 md:gap-8 lg:grid-cols-2">
           <Link
@@ -34,7 +36,7 @@ export default function ProjectsPage() {
                 src="/images/section-icons/food-photo.jpg"
                 alt="Food photography project collection cover image"
                 fill
-                loading="lazy"
+                loading="eager"
                 decoding="async"
                 className="object-cover transition-transform duration-500 group-hover:scale-105"
                 sizes="(max-width: 640px) 100vw, 50vw"
@@ -49,9 +51,7 @@ export default function ProjectsPage() {
                     Food Photo
                   </h2>
                 </div>
-                <span className="rounded-full border border-white/35 px-4 py-2 text-[0.62rem] uppercase tracking-[0.25em] text-white">
-                  Open
-                </span>
+                
               </div>
             </div>
           </Link>
@@ -80,9 +80,7 @@ export default function ProjectsPage() {
                     Other Projects
                   </h2>
                 </div>
-                <span className="rounded-full border border-white/35 px-4 py-2 text-[0.62rem] uppercase tracking-[0.25em] text-white">
-                  Open
-                </span>
+                
               </div>
             </div>
           </Link>

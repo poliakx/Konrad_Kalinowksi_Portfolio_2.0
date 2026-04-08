@@ -7,7 +7,7 @@ import { useRef, useEffect, useState } from "react";
 // Toggle to `false` to disable the auto-scroll while debugging on device.
 const ENABLE_AUTO_SCROLL = true;
 
-const SPEED_PX_PER_SEC = 40;
+const SPEED_PX_PER_SEC = 50;
 
 const photos = [
   {
@@ -36,6 +36,17 @@ export default function PhotoSlider() {
   const [isMobile, setIsMobile] = useState(false);
   const rafRef = useRef<number | null>(null);
   const lastTs = useRef<number | null>(null);
+  const pausedRef = useRef(false);
+
+  const pause = () => {
+    pausedRef.current = true;
+  };
+
+  const resume = () => {
+    pausedRef.current = false;
+    lastTs.current = null;
+  };
+  const [isPaused, setIsPaused] = useState(false)
 
   useEffect(() => {
     if (!ENABLE_AUTO_SCROLL) return;
@@ -46,17 +57,35 @@ export default function PhotoSlider() {
     })();
 
     // keep isMobile state for responsive image quality/sizes
+    let mq: MediaQueryList | undefined;
+    let update: (() => void) | undefined;
     if (typeof window !== "undefined") {
-      const mq = window.matchMedia?.("(max-width: 768px)");
-      const update = () => setIsMobile(!!(mq ? mq.matches : ("ontouchstart" in window)));
+      mq = window.matchMedia?.("(max-width: 768px)");
+      update = () => setIsMobile(!!(mq ? mq.matches : ("ontouchstart" in window)));
       update();
-      mq?.addEventListener?.("change", update);
+      mq?.addEventListener?.("change", update as EventListener);
       // cleanup will remove listener later
+    }
+
+    const pause = () =>{
+      setIsPaused(true);
+    };
+
+    const resume = () =>{
+      lastTs.current = null;
+      setIsPaused(false)
     }
 
     // Use transform-based animation for smoother GPU-accelerated motion (better on mobile Safari).
     const step = (ts: number) => {
       if (lastTs.current === null) lastTs.current = ts;
+
+      // if paused, update lastTs to avoid large dt jump on resume and skip position updates
+      if (pausedRef.current) {
+        lastTs.current = ts;
+        rafRef.current = requestAnimationFrame(step);
+        return;
+      }
 
       const dt = (ts - lastTs.current) / 1000;
       lastTs.current = ts;
@@ -80,17 +109,22 @@ export default function PhotoSlider() {
       rafRef.current = requestAnimationFrame(step);
     };
 
-    // ensure will-change is set for smoother animation
-    if (trackRef.current) trackRef.current.style.willChange = "transform";
+    // ensure will-change is set for smoother animation and initialize translateX
+    if (trackRef.current) {
+      trackRef.current.style.willChange = "transform";
+      trackRef.current.dataset.translateX ??= "0";
+    }
 
     rafRef.current = requestAnimationFrame(step);
 
     return () => {
+      mq?.removeEventListener?.("change", update as EventListener);
       if (rafRef.current !== null) {
         cancelAnimationFrame(rafRef.current);
       }
       rafRef.current = null;
       lastTs.current = null;
+      pausedRef.current = false;
     };
   }, []);
 
@@ -111,6 +145,12 @@ export default function PhotoSlider() {
             ref={trackRef}
             className="flex w-max items-center gap-4 md:gap-6"
             style={{ WebkitOverflowScrolling: "touch", overscrollBehavior: "auto" }}
+            onMouseDown={pause}
+            onMouseUp={resume}
+            onMouseLeave={resume}
+            onTouchStart={pause}
+            onTouchEnd={resume}
+            onTouchCancel={resume}
           >
             {duplicatedPhotos.map((photo, index) => (
               <div
@@ -126,6 +166,12 @@ export default function PhotoSlider() {
                   decoding="async"
                   className="object-cover object-center"
                   draggable={false}
+                  onContextMenu={(e) => e.preventDefault()}
+                  style={{
+                    WebkitTouchCallout: "none",
+                    WebkitUserSelect: "none",
+                    userSelect: "none",
+                  }}
                   sizes="(max-width: 640px) 95vw, (max-width: 1024px) 48vw, 36vw"
                   quality={isMobile ? 60 : 80}
                   priority={index === 0}
