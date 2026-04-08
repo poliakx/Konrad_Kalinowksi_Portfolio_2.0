@@ -16,10 +16,11 @@ export default function FooterShowcase() {
               Final section
             </p>
             <blockquote className="max-w-3xl text-3xl sm:text-4xl font-light leading-[1.05] md:text-6xl">
-              "Every project tells a unique visual story."
+              "Photography that understands food beyond the lens."
             </blockquote>
             <p className="mt-4 max-w-xl text-sm leading-7 text-[#584c43] md:text-base">
-              Creative direction and visual design crafted to bring brands and ideas to life with premium, modern storytelling.
+             In my photography, I focus on the story of the place, the details, and the identity of the venue
+
             </p>
             <Link
               href="/projects"

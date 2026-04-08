@@ -136,11 +136,8 @@ export default function PhotoSlider() {
       id="slider-section"
       className="relative flex min-h-[100svh] items-center overflow-hidden bg-[#f6f3ee] text-black py-10 sm:py-12 md:py-0 md:pt-[7rem] md:pb-12 lg:pt-32 lg:pb-16"
     >
-      <div className="relative flex h-full items-center justify-center md:justify-start px-6 md:px-12">
-        <div className="hidden md:block pointer-events-none absolute left-0 top-0 z-10 h-full w-24 bg-gradient-to-r from-[#f6f3ee] to-transparent" />
-        <div className="hidden md:block pointer-events-none absolute right-0 top-0 z-10 h-full w-24 bg-gradient-to-l from-[#f6f3ee] to-transparent" />
-
-        <div className="w-full overflow-hidden h-full px-4 md:px-0 flex items-center" ref={viewportRef}>
+      <div className="relative flex h-full items-center justify-start md:justify-start px-0 md:px-0">
+        <div className="w-full overflow-hidden h-full px-0 flex items-center" ref={viewportRef}>
           <div
             ref={trackRef}
             className="flex w-max items-center gap-4 md:gap-6"
@@ -180,7 +177,11 @@ export default function PhotoSlider() {
             ))}
           </div>
         </div>
+        {/* Gradients moved to the section level (see below) */}
       </div>
+      {/* Gradients rendered at section level so they are always above transformed track */}
+      <div className="hidden md:block pointer-events-none absolute left-0 top-0 z-50 h-full w-24 bg-gradient-to-r from-[#f6f3ee] to-transparent" />
+      <div className="hidden md:block pointer-events-none absolute right-0 top-0 z-50 h-full w-24 bg-gradient-to-l from-[#f6f3ee] to-transparent" />
     </section>
   );
 }
