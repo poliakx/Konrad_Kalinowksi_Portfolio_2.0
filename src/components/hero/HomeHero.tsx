@@ -31,7 +31,7 @@ export default function HomeHero() {
       <div className="absolute inset-0 z-10 flex items-center justify-end">
 
         {/* TEXT BLOCK */}
-        <div className="max-w-[900px] mx-auto text-right text-white sm:pr-[5%] md:pr-0 transform lg:mx-0 lg:absolute lg:top-1/2 lg:right-[8%] lg:-translate-y-1/2">
+        <div className="max-w-[900px] mx-auto text-center text-white sm:pr-[5%] md:pr-0 transform lg:mx-0 lg:absolute lg:top-1/2 lg:right-[8%] lg:-translate-y-1/2">
 
           <h1 className="font-light leading-[0.9] text-5xl sm:text-[clamp(3rem,8vw,5rem)] lg:text-[clamp(2rem,5vw,5rem)] uppercase">
             Konrad <br />
@@ -47,7 +47,7 @@ export default function HomeHero() {
           </p>
 
           {/* Mobile-only: Open Projects button (smaller, lower, transparent, white text and border) */}
-          <div className="mt-8 sm:hidden flex justify-end">
+          <div className="mt-8 sm:hidden flex justify-center">
             <Link
               href="/projects"
               className="inline-flex items-center justify-center border border-white bg-transparent px-6 py-2 text-sm uppercase tracking-[0.18em] text-white transition-opacity hover:opacity-80"
