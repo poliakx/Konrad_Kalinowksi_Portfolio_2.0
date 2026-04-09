@@ -7,6 +7,19 @@ export default function AboutIntroSection() {
     <section className="bg-[#f7f5f1] px-4 pt-[calc(4rem+env(safe-area-inset-top))] pb-8 md:px-8 md:pt-20">
       <div className="mx-auto w-full max-w-7xl">
         <div className="relative mx-auto w-full">
+          {/* Mobile: show photo above the card for proportional modernist layout */}
+          <div className="block lg:hidden mb-6 pt-[calc(2rem+env(safe-area-inset-top))]">
+            <div className="relative w-full overflow-hidden h-[70vw] sm:h-[56vw]">
+              <CldImage
+                src="ZDJECIEKONRAD_ycdawd"
+                alt="Konrad Kalinowski holding a camera"
+                fill
+                priority
+                className="object-cover"
+                sizes="100vw"
+              />
+            </div>
+          </div>
           <section className="relative overflow-hidden border border-[#171310]/12 bg-[#f6f2ec]/95 shadow-[0_18px_60px_rgba(23,19,16,0.08)]">
             <div className="grid lg:grid-cols-[1fr_1.08fr]">
               <div className="relative hidden lg:block lg:min-h-[360px]">

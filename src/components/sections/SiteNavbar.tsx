@@ -6,7 +6,6 @@ import { usePathname } from "next/navigation";
 import { Instagram } from "lucide-react";
 
 const navItems = [
-  { label: "Home", href: "/" },
   { label: "Projects", href: "/projects" },
   { label: "About", href: "/about" },
   { label: "Contact", href: "/contact" },
@@ -192,15 +191,24 @@ export default function SiteNavbar() {
           <div className={`w-[70vw] sm:w-[80vw] md:w-[90vw] max-w-none bg-black/80 text-white h-full p-6 relative transform transition-transform duration-300 ${menuAnimating ? 'translate-x-0' : '-translate-x-full'}`}>
               <nav className="h-full flex items-start pt-18 relative w-max">
                   <ul className="flex flex-col space-y-6 text-sm uppercase tracking-[0.2em] text-right">
+                  <li>
+                    <Link
+                      href="/"
+                      onClick={(e) => {
+                        scrollHomeToTop(e as any);
+                        setMenuOpen(false);
+                      }}
+                      className="block opacity-100"
+                    >
+                      Home
+                    </Link>
+                  </li>
                   {navItems.map((item) => (
                     <li key={item.href}>
                       <Link
                         href={item.href}
-                        onClick={(e) => {
-                          if (item.label === "Home") scrollHomeToTop(e as any);
-                          setMenuOpen(false);
-                        }}
-                        className={`block ${item.label === "Home" ? "opacity-100" : "opacity-60"}`}
+                        onClick={() => setMenuOpen(false)}
+                        className="block opacity-60"
                       >
                         {item.label}
                       </Link>

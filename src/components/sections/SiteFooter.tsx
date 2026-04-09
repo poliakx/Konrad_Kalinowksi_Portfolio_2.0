@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { Instagram } from "lucide-react";
 
 export default function SiteFooter() {
   const year = new Date().getFullYear();
@@ -42,14 +43,14 @@ export default function SiteFooter() {
 
         <div className="mt-3 flex items-center justify-center gap-6">
           <a href="mailto:hello@konradkalinowski.com" className="opacity-80 hover:opacity-100" aria-label="Email">
-            <svg width="18" height="14" viewBox="0 0 24 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M2 3.5A2 2 0 0 1 4 2h16a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2v-11zm2 .5v9.3l6.9-4.3L4 4zm8.4 4.8L22 14.8V4L12.4 9.3zM20 4l-7.6 5L4 4h16z" fill="currentColor"/>
+            <svg width="22" height="18" viewBox="0 0 20 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M1 2.5A1.5 1.5 0 0 1 2.5 1h15A1.5 1.5 0 0 1 19 2.5v11A1.5 1.5 0 0 1 17.5 15h-15A1.5 1.5 0 0 1 1 13.5v-11z" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"/>
+              <path d="M2 3.5l7 5 7-5" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"/>
             </svg>
           </a>
+
           <a href="https://www.instagram.com/_konradkalinowski.photo/" target="_blank" rel="noopener noreferrer" className="opacity-80 hover:opacity-100" aria-label="Instagram">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm5 6.5a4.5 4.5 0 1 0 .001 9.001A4.5 4.5 0 0 0 12 8.5zM18.5 6a1 1 0 1 0 0 2 1 1 0 0 0 0-2z" fill="currentColor"/>
-            </svg>
+            <Instagram size={18} />
           </a>
         </div>
 
