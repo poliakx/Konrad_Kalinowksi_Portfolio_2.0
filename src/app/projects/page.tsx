@@ -48,7 +48,7 @@ export default function ProjectsPage() {
                     Collection
                   </p>
                   <h2 className="mt-2 text-2xl font-light uppercase tracking-[0.08em] text-white md:text-3xl">
-                    Food Photo
+                    Food & Drinks
                   </h2>
                 </div>
                 

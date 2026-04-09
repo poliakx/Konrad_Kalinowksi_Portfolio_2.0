@@ -6,7 +6,7 @@ import { usePathname } from "next/navigation";
 import { Instagram } from "lucide-react";
 
 const navItems = [
-  { label: "Home", href: "/" },
+  // { label: "Home", href: "/" },
   { label: "Projects", href: "/projects" },
   { label: "About", href: "/about" },
   { label: "Contact", href: "/contact" },
@@ -127,7 +127,7 @@ export default function SiteNavbar() {
 
             {/* LOGO (desktop) */}
             <Link href="/" onClick={scrollHomeToTop} className="text-sm font-light uppercase tracking-[0.35em] hidden md:inline-block">
-              KONRAD
+              HOME
             </Link>
 
             {/* CENTER NAV (desktop only) */}
@@ -151,7 +151,7 @@ export default function SiteNavbar() {
             <div className="flex w-full items-center md:hidden">
               <div className="flex-shrink-0">
                 <Link href="/" onClick={scrollHomeToTop} className="text-sm uppercase tracking-[0.2em] hover:opacity-70 transition">
-                  Logo
+                  HOME
                 </Link>
               </div>
 
