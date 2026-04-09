@@ -39,8 +39,6 @@ export default function SiteFooter() {
       {/* Mobile footer: centered, minimalist (logo, small text, social icons, copyright, credit) */}
       <div className="flex md:hidden mx-auto w-full max-w-xs flex-col items-center gap-3 px-4 py-6 text-center text-black/90">
 
-        <p className="mt-1 text-xs text-black/60">This is the footer text</p>
-
         <div className="mt-3 flex items-center justify-center gap-6">
           <a href="mailto:hello@konradkalinowski.com" className="opacity-80 hover:opacity-100" aria-label="Email">
             <svg width="22" height="18" viewBox="0 0 20 16" fill="none" xmlns="http://www.w3.org/2000/svg">

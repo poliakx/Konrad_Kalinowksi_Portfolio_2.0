@@ -134,7 +134,7 @@ export default function PhotoSlider() {
     return (
     <section
       id="slider-section"
-      className="relative flex min-h-[100svh] items-center overflow-hidden bg-[#f6f3ee] text-black py-10 sm:py-12 md:py-0 md:pt-[7rem] md:pb-12 lg:pt-32 lg:pb-16"
+      className="relative flex min-h-[100svh] items-center overflow-hidden bg-[#f6f3ee] text-black pt-4 pb-0 sm:py-10 md:py-0 md:pt-[7rem] md:pb-12 lg:pt-32 lg:pb-16"
     >
       <div className="relative flex h-full items-center justify-start md:justify-start px-0 md:px-0">
         <div className="w-full overflow-hidden h-full px-0 flex items-center" ref={viewportRef}>
