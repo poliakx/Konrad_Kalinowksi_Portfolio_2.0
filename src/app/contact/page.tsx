@@ -42,7 +42,7 @@ export default function ContactPage() {
             </div>
             <div className="flex min-h-[40vh] md:min-h-[460px] flex-col p-4 md:p-8 lg:p-12">
               <p className="mb-3 text-[0.68rem] uppercase tracking-[0.34em] text-[#6f6257]">
-                Contact Us
+                Contact Me
               </p>
               <h1 className="max-w-md text-[calc(18px+2.6vw)] font-light leading-[1.03] md:text-4xl">
                 Let&apos;s Connect, Collaborate,
