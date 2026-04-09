@@ -3,10 +3,7 @@
 import Image from "next/image";
 import { useRef, useEffect, useState } from "react";
 
-// Auto-enable the auto-scroll while in development (localhost).
-// Toggle to `false` to disable the auto-scroll while debugging on device.
 const ENABLE_AUTO_SCROLL = true;
-
 const SPEED_PX_PER_SEC = 50;
 
 const photos = [
@@ -29,87 +26,119 @@ const photos = [
 ];
 
 export default function PhotoSlider() {
-  // Always duplicate photos to allow seamless continuous looping.
   const duplicatedPhotos = [...photos, ...photos];
+
   const viewportRef = useRef<HTMLDivElement | null>(null);
   const trackRef = useRef<HTMLDivElement | null>(null);
-  const [isMobile, setIsMobile] = useState(false);
+
   const rafRef = useRef<number | null>(null);
   const lastTs = useRef<number | null>(null);
-  const pausedRef = useRef(false);
 
-  const pause = () => {
-    pausedRef.current = true;
+  const [isMobile, setIsMobile] = useState(false);
+
+  // manual hold / drag state
+  const pointerDownRef = useRef(false);
+  const isDraggingRef = useRef(false);
+  const isHoldingRef = useRef(false);
+
+  const startXRef = useRef(0);
+  const startYRef = useRef(0);
+  const startTranslateRef = useRef(0);
+
+  // inertia
+  const velocityRef = useRef(0);
+  const lastPointerXRef = useRef(0);
+  const lastPointerTsRef = useRef(0);
+  const inertiaVelocityRef = useRef(0);
+
+  // touchpad / wheel gesture
+  const wheelHoldTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  const DRAG_THRESHOLD_PX = 8;
+  const INERTIA_FRICTION = 0.92;
+  const MIN_INERTIA_SPEED = 8;
+
+  const normalizeTranslate = (value: number, half: number) => {
+    if (!half) return value;
+
+    let next = value;
+
+    while (next <= -half) next += half;
+    while (next > 0) next -= half;
+
+    return next;
   };
 
-  const resume = () => {
-    pausedRef.current = false;
-    lastTs.current = null;
+  const setTranslate = (value: number) => {
+    const el = trackRef.current;
+    if (!el) return;
+
+    const half = el.scrollWidth / 2 || 0;
+    const normalized = normalizeTranslate(value, half);
+
+    el.dataset.translateX = String(normalized);
+    el.style.transform = `translate3d(${normalized}px, 0, 0)`;
   };
-  const [isPaused, setIsPaused] = useState(false)
 
   useEffect(() => {
     if (!ENABLE_AUTO_SCROLL) return;
-    const speed = ((): number => {
+
+    const speed = (() => {
       if (typeof window === "undefined") return SPEED_PX_PER_SEC;
-      const mobile = window.matchMedia?.("(max-width: 768px)").matches || "ontouchstart" in window;
+      const mobile =
+        window.matchMedia?.("(max-width: 768px)").matches || "ontouchstart" in window;
       return mobile ? SPEED_PX_PER_SEC * 0.55 : SPEED_PX_PER_SEC;
     })();
 
-    // keep isMobile state for responsive image quality/sizes
     let mq: MediaQueryList | undefined;
     let update: (() => void) | undefined;
+
     if (typeof window !== "undefined") {
       mq = window.matchMedia?.("(max-width: 768px)");
-      update = () => setIsMobile(!!(mq ? mq.matches : ("ontouchstart" in window)));
+      update = () => setIsMobile(!!(mq ? mq.matches : "ontouchstart" in window));
       update();
       mq?.addEventListener?.("change", update as EventListener);
-      // cleanup will remove listener later
     }
 
-    const pause = () =>{
-      setIsPaused(true);
-    };
-
-    const resume = () =>{
-      lastTs.current = null;
-      setIsPaused(false)
-    }
-
-    // Use transform-based animation for smoother GPU-accelerated motion (better on mobile Safari).
     const step = (ts: number) => {
       if (lastTs.current === null) lastTs.current = ts;
-
-      // if paused, update lastTs to avoid large dt jump on resume and skip position updates
-      if (pausedRef.current) {
-        lastTs.current = ts;
-        rafRef.current = requestAnimationFrame(step);
-        return;
-      }
 
       const dt = (ts - lastTs.current) / 1000;
       lastTs.current = ts;
 
       const el = trackRef.current;
-      if (el) {
-        const half = el.scrollWidth / 2 || 0;
-
-        // store current translate in data attribute to avoid reflows reading computedStyle
-        let pos = Number(el.dataset.translateX) || 0;
-        pos -= speed * dt;
-
-        if (half && Math.abs(pos) >= half) {
-          pos += half * Math.floor(Math.abs(pos) / half);
-        }
-
-        el.dataset.translateX = String(pos);
-        el.style.transform = `translate3d(${pos}px,0,0)`;
+      if (!el) {
+        rafRef.current = requestAnimationFrame(step);
+        return;
       }
+
+      let pos = Number(el.dataset.translateX) || 0;
+
+      // поки користувач утримує або drag-ає — автоскрол стоїть
+      if (isHoldingRef.current || isDraggingRef.current) {
+        rafRef.current = requestAnimationFrame(step);
+        return;
+      }
+
+      // інерція після drag / touchpad swipe
+      if (Math.abs(inertiaVelocityRef.current) > MIN_INERTIA_SPEED) {
+        pos += inertiaVelocityRef.current * dt;
+        inertiaVelocityRef.current *= Math.pow(INERTIA_FRICTION, dt * 60);
+        setTranslate(pos);
+
+        rafRef.current = requestAnimationFrame(step);
+        return;
+      }
+
+      inertiaVelocityRef.current = 0;
+
+      // звичайний auto-scroll
+      pos -= speed * dt;
+      setTranslate(pos);
 
       rafRef.current = requestAnimationFrame(step);
     };
 
-    // ensure will-change is set for smoother animation and initialize translateX
     if (trackRef.current) {
       trackRef.current.style.willChange = "transform";
       trackRef.current.dataset.translateX ??= "0";
@@ -119,40 +148,199 @@ export default function PhotoSlider() {
 
     return () => {
       mq?.removeEventListener?.("change", update as EventListener);
+
       if (rafRef.current !== null) {
         cancelAnimationFrame(rafRef.current);
       }
+
+      if (wheelHoldTimeoutRef.current) {
+        clearTimeout(wheelHoldTimeoutRef.current);
+      }
+
       rafRef.current = null;
       lastTs.current = null;
-      pausedRef.current = false;
+      pointerDownRef.current = false;
+      isDraggingRef.current = false;
+      isHoldingRef.current = false;
+      velocityRef.current = 0;
+      inertiaVelocityRef.current = 0;
     };
   }, []);
 
-  // Set --vh CSS variable to handle mobile browser chrome (address bar) resizing.
-  // `--vh` is now set globally by `SetVh` in the layout.
+  const handlePointerDown = (e: React.PointerEvent<HTMLDivElement>) => {
+    const viewport = viewportRef.current;
+    const track = trackRef.current;
+    if (!viewport || !track) return;
 
-    return (
+    pointerDownRef.current = true;
+    isDraggingRef.current = false;
+    isHoldingRef.current = true;
+
+    startXRef.current = e.clientX;
+    startYRef.current = e.clientY;
+    startTranslateRef.current = Number(track.dataset.translateX) || 0;
+
+    lastPointerXRef.current = e.clientX;
+    lastPointerTsRef.current = performance.now();
+    velocityRef.current = 0;
+    inertiaVelocityRef.current = 0;
+
+    viewport.setPointerCapture?.(e.pointerId);
+  };
+
+  const handlePointerMove = (e: React.PointerEvent<HTMLDivElement>) => {
+    if (!pointerDownRef.current) return;
+
+    const dx = e.clientX - startXRef.current;
+    const dy = e.clientY - startYRef.current;
+
+    if (!isDraggingRef.current) {
+      const absX = Math.abs(dx);
+      const absY = Math.abs(dy);
+
+      if (absX < DRAG_THRESHOLD_PX && absY < DRAG_THRESHOLD_PX) {
+        return;
+      }
+
+      // якщо користувач пішов вертикально — просто відпускаємо hold
+      // щоб сторінка могла скролитись нормально
+      if (absY > absX) {
+        pointerDownRef.current = false;
+        isHoldingRef.current = false;
+
+        const viewport = viewportRef.current;
+        if (viewport?.hasPointerCapture?.(e.pointerId)) {
+          viewport.releasePointerCapture(e.pointerId);
+        }
+        return;
+      }
+
+      isDraggingRef.current = true;
+    }
+
+    const nextTranslate = startTranslateRef.current + dx;
+    setTranslate(nextTranslate);
+
+    const now = performance.now();
+    const deltaX = e.clientX - lastPointerXRef.current;
+    const deltaT = (now - lastPointerTsRef.current) / 1000;
+
+    if (deltaT > 0) {
+      velocityRef.current = deltaX / deltaT;
+    }
+
+    lastPointerXRef.current = e.clientX;
+    lastPointerTsRef.current = now;
+  };
+
+  const finishPointerGesture = (pointerId?: number) => {
+    const viewport = viewportRef.current;
+
+    if (pointerId !== undefined && viewport?.hasPointerCapture?.(pointerId)) {
+      viewport.releasePointerCapture(pointerId);
+    }
+
+    const wasDragging = isDraggingRef.current;
+
+    pointerDownRef.current = false;
+    isDraggingRef.current = false;
+    isHoldingRef.current = false;
+
+    if (wasDragging) {
+      inertiaVelocityRef.current = velocityRef.current;
+    } else {
+      velocityRef.current = 0;
+    }
+
+    lastTs.current = null;
+  };
+
+  const handlePointerUp = (e: React.PointerEvent<HTMLDivElement>) => {
+    finishPointerGesture(e.pointerId);
+  };
+
+  const handlePointerCancel = (e: React.PointerEvent<HTMLDivElement>) => {
+    finishPointerGesture(e.pointerId);
+  };
+
+  const handleWheel = (e: React.WheelEvent<HTMLDivElement>) => {
+    const track = trackRef.current;
+    if (!track) return;
+
+    const absX = Math.abs(e.deltaX);
+    const absY = Math.abs(e.deltaY);
+
+    // тільки горизонтальний жест тачпаду
+    if (absX <= absY || absX === 0) return;
+
+    e.preventDefault();
+
+    // поки wheel gesture триває — вважаємо це hold
+    isHoldingRef.current = true;
+    inertiaVelocityRef.current = 0;
+
+    const currentTranslate = Number(track.dataset.translateX) || 0;
+    const nextTranslate = currentTranslate - e.deltaX;
+    setTranslate(nextTranslate);
+
+    if (wheelHoldTimeoutRef.current) {
+      clearTimeout(wheelHoldTimeoutRef.current);
+    }
+
+    wheelHoldTimeoutRef.current = setTimeout(() => {
+      isHoldingRef.current = false;
+      lastTs.current = null;
+    }, 90);
+  };
+
+  const handleContextMenu = (e: React.MouseEvent<HTMLDivElement>) => {
+    // щоб two-finger tap на тачпаді не відкривав меню браузера
+    e.preventDefault();
+
+    // коротко зупиняємо, поки йде сам жест
+    isHoldingRef.current = true;
+
+    if (wheelHoldTimeoutRef.current) {
+      clearTimeout(wheelHoldTimeoutRef.current);
+    }
+
+    wheelHoldTimeoutRef.current = setTimeout(() => {
+      isHoldingRef.current = false;
+      lastTs.current = null;
+    }, 90);
+  };
+
+  return (
     <section
       id="slider-section"
-      className="relative flex min-h-[100svh] items-center overflow-hidden bg-[#f6f3ee] text-black pt-4 pb-0 sm:py-10 md:py-0 md:pt-[7rem] md:pb-12 lg:pt-32 lg:pb-16"
+      className="relative flex min-h-[100svh] items-center overflow-hidden bg-[#f6f3ee] pt-8 pb-6 sm:py-12 md:py-0 md:pt-[7rem] md:pb-12 lg:pt-32 lg:pb-16"
     >
-      <div className="relative flex h-full items-center justify-start md:justify-start px-0 md:px-0">
-        <div className="w-full overflow-hidden h-full px-0 flex items-center" ref={viewportRef}>
+      <div className="relative flex h-full items-center justify-start px-0 md:justify-start md:px-0">
+        <div
+          ref={viewportRef}
+          className="flex h-full w-full items-center overflow-hidden px-0 cursor-grab active:cursor-grabbing"
+          onPointerDown={handlePointerDown}
+          onPointerMove={handlePointerMove}
+          onPointerUp={handlePointerUp}
+          onPointerCancel={handlePointerCancel}
+          onWheel={handleWheel}
+          onContextMenu={handleContextMenu}
+          style={{
+            touchAction: "pan-y",
+          }}
+        >
           <div
             ref={trackRef}
             className="flex w-max items-center gap-4 md:gap-6"
-            style={{ WebkitOverflowScrolling: "touch", overscrollBehavior: "auto" }}
-            onMouseDown={pause}
-            onMouseUp={resume}
-            onMouseLeave={resume}
-            onTouchStart={pause}
-            onTouchEnd={resume}
-            onTouchCancel={resume}
+            style={{
+              WebkitOverflowScrolling: "touch",
+              overscrollBehavior: "none",
+            }}
           >
             {duplicatedPhotos.map((photo, index) => (
               <div
                 key={`${photo.src}-${index}`}
-                className="relative w-[80vw] aspect-[3/4] shrink-0 overflow-hidden sm:w-[48vw] md:aspect-[4/3] md:h-[72vh] md:w-[36vw]"
+                className="relative w-[80vw] aspect-[3/4] shrink-0 overflow-hidden sm:w-[48vw] md:h-[72vh] md:w-[36vw] md:aspect-[4/3]"
                 style={{ minHeight: "220px" }}
               >
                 <Image
@@ -161,7 +349,7 @@ export default function PhotoSlider() {
                   fill
                   loading={index < 2 ? "eager" : "lazy"}
                   decoding="async"
-                  className="object-cover object-center"
+                  className="pointer-events-none object-cover object-center"
                   draggable={false}
                   onContextMenu={(e) => e.preventDefault()}
                   style={{
@@ -177,11 +365,10 @@ export default function PhotoSlider() {
             ))}
           </div>
         </div>
-        {/* Gradients moved to the section level (see below) */}
       </div>
-      {/* Gradients rendered at section level so they are always above transformed track */}
-      <div className="hidden md:block pointer-events-none absolute left-0 top-0 z-50 h-full w-24 bg-gradient-to-r from-[#f6f3ee] to-transparent" />
-      <div className="hidden md:block pointer-events-none absolute right-0 top-0 z-50 h-full w-24 bg-gradient-to-l from-[#f6f3ee] to-transparent" />
+
+      <div className="pointer-events-none absolute left-0 top-0 z-50 hidden h-full w-24 bg-gradient-to-r from-[#f6f3ee] to-transparent md:block" />
+      <div className="pointer-events-none absolute right-0 top-0 z-50 hidden h-full w-24 bg-gradient-to-l from-[#f6f3ee] to-transparent md:block" />
     </section>
   );
 }
