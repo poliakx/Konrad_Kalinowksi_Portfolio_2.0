@@ -6,7 +6,7 @@ export default function SiteFooter() {
   return (
     <footer className="border-t border-black/15 bg-white text-black">
       {/* Desktop / tablet footer (visible md+) */}
-      <div className="hidden md:flex mx-auto w-full max-w-7xl flex-col gap-6 px-6 py-7 text-[0.7rem] uppercase tracking-[0.24em] text-black/60 md:flex-row md:items-center md:justify-between md:px-10">
+      <div className="hidden md:grid mx-auto w-full max-w-7xl gap-6 px-6 py-7 text-[0.7rem] uppercase tracking-[0.24em] text-black/60 md:grid-cols-3 md:items-center md:px-10">
         <div className="flex items-center gap-6">
           <Link href="/" className="transition-opacity hover:opacity-65">
             Home
@@ -14,17 +14,11 @@ export default function SiteFooter() {
           <Link href="/projects" className="transition-opacity hover:opacity-65">
             Projects
           </Link>
-          <Link href="/projects/food-photo" className="transition-opacity hover:opacity-65">
-            Food Photo
-          </Link>
         </div>
 
-        <div className="flex flex-wrap items-center gap-6 md:justify-end">
+        <div className="flex items-center justify-center gap-6">
           <a href="mailto:hello@konradkalinowski.com" className="transition-opacity hover:opacity-65">
             hello@konradkalinowski.com
-          </a>
-          <a href="tel:+48600111222" className="transition-opacity hover:opacity-65">
-            +48 600 111 222
           </a>
           <a
             href="https://www.instagram.com/_konradkalinowski.photo/"
@@ -34,6 +28,9 @@ export default function SiteFooter() {
           >
             Instagram
           </a>
+        </div>
+
+        <div className="flex items-center justify-end gap-6">
           <p>All rights reserved {year}</p>
         </div>
       </div>
@@ -55,10 +52,6 @@ export default function SiteFooter() {
             </svg>
           </a>
         </div>
-
-        <a href="tel:+48600111222" className="mt-3 text-sm font-medium text-black/80" aria-label="Phone">
-          +48 600 111 222
-        </a>
 
         <p className="mt-3 text-xs text-black/60">© {year} Konrad Kalinowski</p>
         
