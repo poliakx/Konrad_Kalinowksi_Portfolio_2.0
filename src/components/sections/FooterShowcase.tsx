@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export default function FooterShowcase() {
   return (
-    <section className="relative overflow-hidden bg-[#f6f3ee] text-[#18130f]">
+    <section className="relative overflow-hidden pt-20 bg-[#f6f3ee] text-[#18130f]">
       <div className="absolute -left-12 top-20 h-44 w-44 rounded-full bg-[#dcc8b6]/35 blur-3xl" />
       <div className="absolute -right-12 bottom-8 h-56 w-56 rounded-full bg-[#cfb39a]/30 blur-3xl" />
 

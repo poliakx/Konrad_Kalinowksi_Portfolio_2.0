@@ -270,12 +270,12 @@ export default function PhotoSlider() {
     const absX = Math.abs(e.deltaX);
     const absY = Math.abs(e.deltaY);
 
-    // тільки горизонтальний жест тачпаду
+    
     if (absX <= absY || absX === 0) return;
 
     e.preventDefault();
 
-    // поки wheel gesture триває — вважаємо це hold
+    
     isHoldingRef.current = true;
     inertiaVelocityRef.current = 0;
 
@@ -294,10 +294,10 @@ export default function PhotoSlider() {
   };
 
   const handleContextMenu = (e: React.MouseEvent<HTMLDivElement>) => {
-    // щоб two-finger tap на тачпаді не відкривав меню браузера
+   
     e.preventDefault();
 
-    // коротко зупиняємо, поки йде сам жест
+    
     isHoldingRef.current = true;
 
     if (wheelHoldTimeoutRef.current) {
@@ -313,7 +313,7 @@ export default function PhotoSlider() {
   return (
     <section
       id="slider-section"
-      className="relative flex min-h-[100svh] items-center overflow-hidden bg-[#f6f3ee] pt-8 pb-6 sm:py-12 md:py-0 md:pt-[7rem] md:pb-12 lg:pt-32 lg:pb-16"
+      className="relative flex min-h-[100svh] items-center overflow-hidden bg-[#f6f3ee] pt-12 pb-6 sm:py-16 md:py-0 md:pt-[8rem] md:pb-12 lg:pt-40 lg:pb-16"
     >
       <div className="relative flex h-full items-center justify-start px-0 md:justify-start md:px-0">
         <div
@@ -347,7 +347,7 @@ export default function PhotoSlider() {
                   src={photo.src}
                   alt={photo.alt}
                   fill
-                  loading={index < 2 ? "eager" : "lazy"}
+                  loading={photo.src === "/images/slider/photo-1.jpg" ? "eager" : (index < 2 ? "eager" : "lazy")}
                   decoding="async"
                   className="pointer-events-none object-cover object-center"
                   draggable={false}
