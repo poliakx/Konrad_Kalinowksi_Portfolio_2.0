@@ -1,4 +1,6 @@
 import { Analytics } from "@vercel/analytics/next"
+import { SpeedInsights } from "@vercel/speed-insights/next"
+
 import SiteNavbar from "@/src/components/sections/SiteNavbar";
 import SiteFooter from "@/src/components/sections/SiteFooter";
 import SetVh from "@/src/components/SetVh";
@@ -40,6 +42,7 @@ export default function RootLayout({
         <main className="flex flex-1 flex-col">{children}</main>
         <SiteFooter />
         <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );

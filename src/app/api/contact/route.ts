@@ -24,18 +24,23 @@ export async function POST(request: NextRequest) {
 
     // 🔥 SEND EMAIL
     const { error } = await resend.emails.send({
-      from: "Konrad <contact@send.konradkalinowski.pl>", 
-      to: process.env.CONTACT_TO_EMAIL!,
-      replyTo: email,
-      subject: `New message from ${name}`,
-      text: `
-Name: ${name}
+  from: "Konrad <contact@konradkalinowski.pl>",
+  to: process.env.CONTACT_TO_EMAIL!,
+  replyTo: email,
+  subject: `New message from ${name}`,
+  text: `Name: ${name}
 Email: ${email}
 
 Message:
-${message}
-      `,
-    });
+${message}`,
+  html: `
+    <h2>New message from website</h2>
+    <p><strong>Name:</strong> ${name}</p>
+    <p><strong>Email:</strong> ${email}</p>
+    <p><strong>Message:</strong></p>
+    <p>${message}</p>
+  `,
+});
 
     if (error) {
       console.error("Resend error:", error);
