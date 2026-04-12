@@ -25,26 +25,6 @@ export default function LightboxModal({
     setImageNaturalSize(null);
   }, [activePhotoIndex]);
 
-  useEffect(() => {
-    if (activePhotoIndex === null) return;
-
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === "ArrowRight") {
-        e.preventDefault();
-        onNext();
-      } else if (e.key === "ArrowLeft") {
-        e.preventDefault();
-        onPrevious();
-      } else if (e.key === "Escape") {
-        e.preventDefault();
-        onClose();
-      }
-    };
-
-    window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
-  }, [activePhotoIndex, onNext, onPrevious, onClose]);
-
   if (activePhotoIndex === null) {
     return null;
   }

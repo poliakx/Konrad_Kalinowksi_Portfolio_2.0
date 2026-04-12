@@ -16,7 +16,7 @@ export default function PhotoGallery({ photos }: PhotoGalleryProps) {
     useLightboxNavigation(photos.length);
 
   return (
-    <main className="min-h-screen bg-[#faf7f3] px-4 pb-16 pt-24 text-[#1e1813] md:px-8 md:pb-24">
+    <div className="min-h-screen bg-[#faf7f3] px-4 pb-16 pt-24 text-[#1e1813] md:px-8 md:pb-24">
       <GalleryGrid photos={photos} onPhotoClick={openLightbox} />
 
       <LightboxModal
@@ -26,6 +26,6 @@ export default function PhotoGallery({ photos }: PhotoGalleryProps) {
         onNext={showNext}
         onPrevious={showPrevious}
       />
-    </main>
+    </div>
   );
 }

@@ -1,14 +1,9 @@
 
 "use client"
-import { useEffect } from "react";
 import Link from "next/link";
 import { CldImage } from "next-cloudinary";
 
 export default function HomeHero() {
-  useEffect(() => {
-    // `--vh` is handled centrally by `SetVh` in the layout; no local effect needed.
-  }, []);
-
   return (
     <section id="hero-section"
       className="relative w-full overflow-hidden bg-black px-6 sm:px-10 md:px-20 lg:px-24 min-h-[100svh]"
@@ -38,7 +33,7 @@ export default function HomeHero() {
             Kalinowski
           </h1>
 
-          <p className="tracking-[0.4em] text-white/70 text-xs sm:text-sm md:text-sm mb-4 sm:text-neutral-500">
+          <p className="tracking-[0.4em] text-white/70 text-xs sm:text-sm md:text-sm mb-4">
             Photography
           </p>
 

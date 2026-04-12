@@ -2,31 +2,12 @@
 
 import Image from "next/image";
 import { useRef, useEffect, useState } from "react";
+import { sliderPhotos } from "@/src/data/slider";
 
-const ENABLE_AUTO_SCROLL = true;
 const SPEED_PX_PER_SEC = 50;
 
-const photos = [
-  {
-    src: "/images/slider/photo-1.jpg",
-    alt: "Editorial food photography of a plated dish",
-  },
-  {
-    src: "/images/slider/photo-2.jpg",
-    alt: "Modern restaurant food composition photographed in studio light",
-  },
-  {
-    src: "/images/slider/photo-3.jpg",
-    alt: "Dessert close-up from Konrad Kalinowski photography portfolio",
-  },
-  {
-    src: "/images/slider/photo-4.jpg",
-    alt: "Cocktail photography with cinematic bar styling",
-  },
-];
-
 export default function PhotoSlider() {
-  const duplicatedPhotos = [...photos, ...photos];
+  const duplicatedPhotos = [...sliderPhotos, ...sliderPhotos];
 
   const viewportRef = useRef<HTMLDivElement | null>(null);
   const trackRef = useRef<HTMLDivElement | null>(null);
@@ -81,8 +62,6 @@ export default function PhotoSlider() {
   };
 
   useEffect(() => {
-    if (!ENABLE_AUTO_SCROLL) return;
-
     const speed = (() => {
       if (typeof window === "undefined") return SPEED_PX_PER_SEC;
       const mobile =

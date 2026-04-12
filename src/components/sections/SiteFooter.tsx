@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Instagram } from "lucide-react";
+import { SITE_CONFIG } from "@/src/config/site";
 
 export default function SiteFooter() {
   const year = new Date().getFullYear();
@@ -19,10 +20,10 @@ export default function SiteFooter() {
 
         <div className="flex items-center justify-center gap-6">
           <Link href="/contact" className="transition-opacity hover:opacity-65">
-            konradkalinowski.photo@gmail.com
+            {SITE_CONFIG.email}
           </Link>
           <a
-            href="https://www.instagram.com/_konradkalinowski.photo/"
+            href={SITE_CONFIG.instagramUrl}
             target="_blank"
             rel="noopener noreferrer"
             className="transition-opacity hover:opacity-65"
@@ -47,7 +48,7 @@ export default function SiteFooter() {
             </svg>
           </Link>
 
-          <a href="https://www.instagram.com/_konradkalinowski.photo/" target="_blank" rel="noopener noreferrer" className="opacity-80 hover:opacity-100" aria-label="Instagram">
+          <a href={SITE_CONFIG.instagramUrl} target="_blank" rel="noopener noreferrer" className="opacity-80 hover:opacity-100" aria-label="Instagram">
             <Instagram size={18} />
           </a>
         </div>

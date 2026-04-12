@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 
-import HomeHero from "../components/hero/HomeHero";
-import FooterShowcase from "../components/sections/FooterShowcase";
-import PhotoSlider from "../components/slider/PhotoSlider";
+import HomeHero from "@/src/components/hero/HomeHero";
+import FooterShowcase from "@/src/components/sections/FooterShowcase";
+import PhotoSlider from "@/src/components/slider/PhotoSlider";
 
 export const metadata: Metadata = {
   title: "Home",
@@ -24,10 +24,10 @@ export const metadata: Metadata = {
 
 export default function Home() {
   return (
-    <main>
+    <>
       <HomeHero />
       <PhotoSlider />
       <FooterShowcase />
-    </main>
+    </>
   );
 }

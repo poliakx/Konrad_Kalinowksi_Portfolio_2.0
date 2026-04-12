@@ -1,6 +1,23 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Booking",
+  description: "Book a photo session with Konrad Kalinowski.",
+  openGraph: {
+    title: "Konrad Kalinowski | Booking",
+    description: "Book a photo session with Konrad Kalinowski.",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Konrad Kalinowski | Booking",
+    description: "Book a photo session with Konrad Kalinowski.",
+  },
+};
+
 export default function BookingPage() {
   return (
-    <main className="min-h-[60vh] bg-[#f7f5f1] px-4 pb-6 pt-[calc(5rem+env(safe-area-inset-top))] text-[#171310] md:px-8 md:pb-12 md:pt-20 overflow-x-hidden">
+    <div className="min-h-[60vh] bg-[#f7f5f1] px-4 pb-6 pt-[calc(5rem+env(safe-area-inset-top))] text-[#171310] md:px-8 md:pb-12 md:pt-20 overflow-x-hidden">
       <div className="relative mx-auto w-full max-w-4xl">
         <section className="mb-6 max-w-2xl">
           <h1 className="text-[calc(18px+2.2vw)] md:text-3xl font-semibold tracking-tight">Book a photo session</h1>
@@ -26,6 +43,6 @@ export default function BookingPage() {
           <p>Konrad Kalinowski</p>
         </div>
       </div>
-    </main>
+    </div>
   );
 }

@@ -4,6 +4,7 @@ import { useEffect, useState, useRef, type MouseEvent as ReactMouseEvent } from 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Instagram } from "lucide-react";
+import { SITE_CONFIG } from "@/src/config/site";
 
 const navItems = [
   { label: "Projects", href: "/projects" },
@@ -175,7 +176,7 @@ export default function SiteNavbar() {
 
             {/* INSTAGRAM (desktop) */}
             <Link
-              href="https://www.instagram.com/_konradkalinowski.photo/"
+              href={SITE_CONFIG.instagramUrl}
               target="_blank"
               rel="noopener noreferrer"
               className="hidden md:inline-flex hover:opacity-70 transition"
@@ -196,7 +197,7 @@ export default function SiteNavbar() {
                     <Link
                       href="/"
                       onClick={(e) => {
-                        scrollHomeToTop(e as any);
+                        scrollHomeToTop(e);
                         setMenuOpen(false);
                       }}
                       className="block opacity-100"
@@ -230,7 +231,7 @@ export default function SiteNavbar() {
               </nav>
               <div className="absolute bottom-6 left-6 right-6 flex items-center gap-4">
                 <a
-                  href="https://www.instagram.com/_konradkalinowski.photo/"
+                  href={SITE_CONFIG.instagramUrl}
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="Instagram"
