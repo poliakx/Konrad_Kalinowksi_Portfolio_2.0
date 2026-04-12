@@ -1,10 +1,13 @@
 import { NextRequest, NextResponse } from "next/server";
+import { Resend } from "resend";
+
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function POST(request: NextRequest) {
   try {
     const { name, email, message } = await request.json();
 
-    // Validate inputs
+    // Validation
     if (!name || !email || !message) {
       return NextResponse.json(
         { message: "Missing required fields" },
@@ -19,26 +22,37 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // TODO: Implement email sending
-    // This is where you would integrate with your email service:
-    // - Resend (https://resend.com)
-    // - SendGrid (https://sendgrid.com)
-    // - Gmail/SMTP via nodemailer
-    // - AWS SES
-    // etc.
+    // 🔥 SEND EMAIL
+    const { error } = await resend.emails.send({
+      from: "Portfolio Contact <onboarding@resend.dev>", // змінити пізніше
+      to: process.env.CONTACT_TO_EMAIL!,
+      replyTo: email,
+      subject: `New message from ${name}`,
+      text: `
+Name: ${name}
+Email: ${email}
 
-    // For now, just return success
-    // In production, you'd send the email here
-    console.log("Contact form submission:", { name, email, message });
+Message:
+${message}
+      `,
+    });
+
+    if (error) {
+      console.error("Resend error:", error);
+      return NextResponse.json(
+        { message: "Failed to send email" },
+        { status: 500 }
+      );
+    }
 
     return NextResponse.json(
-      { message: "Message received! We'll be in touch soon." },
+      { message: "Message sent successfully!" },
       { status: 200 }
     );
   } catch (error) {
     console.error("Contact form error:", error);
     return NextResponse.json(
-      { message: "Failed to process your message. Please try again." },
+      { message: "Something went wrong" },
       { status: 500 }
     );
   }

@@ -1,3 +1,4 @@
+import { Analytics } from "@vercel/analytics/next"
 import SiteNavbar from "@/src/components/sections/SiteNavbar";
 import SiteFooter from "@/src/components/sections/SiteFooter";
 import SetVh from "@/src/components/SetVh";
@@ -38,6 +39,7 @@ export default function RootLayout({
         <SiteNavbar />
         <main className="flex flex-1 flex-col">{children}</main>
         <SiteFooter />
+        <Analytics />
       </body>
     </html>
   );
