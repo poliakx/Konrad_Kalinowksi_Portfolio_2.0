@@ -25,6 +25,26 @@ export default function LightboxModal({
     setImageNaturalSize(null);
   }, [activePhotoIndex]);
 
+  useEffect(() => {
+    if (activePhotoIndex === null) return;
+
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "ArrowRight") {
+        e.preventDefault();
+        onNext();
+      } else if (e.key === "ArrowLeft") {
+        e.preventDefault();
+        onPrevious();
+      } else if (e.key === "Escape") {
+        e.preventDefault();
+        onClose();
+      }
+    };
+
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [activePhotoIndex, onNext, onPrevious, onClose]);
+
   if (activePhotoIndex === null) {
     return null;
   }
@@ -84,10 +104,12 @@ export default function LightboxModal({
           event.stopPropagation();
           onPrevious();
         }}
-        className="absolute left-4 top-1/2 z-10 inline-flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-white bg-white/15 text-base text-white transition-colors hover:bg-white hover:text-black md:left-6"
+        className="absolute left-3 top-1/2 z-10 -translate-y-1/2 md:left-6 flex items-center justify-center p-2 text-white/90 hover:text-white transition-transform focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-black/50 hover:scale-105"
         aria-label="Previous photo"
       >
-        ‹
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" aria-hidden>
+          <path d="M15 18L9 12L15 6" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+        </svg>
       </button>
 
       <button
@@ -96,10 +118,12 @@ export default function LightboxModal({
           event.stopPropagation();
           onNext();
         }}
-        className="absolute right-4 top-1/2 z-10 inline-flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-white bg-white/15 text-base text-white transition-colors hover:bg-white hover:text-black md:right-6"
+        className="absolute right-3 top-1/2 z-10 -translate-y-1/2 md:right-6 flex items-center justify-center p-2 text-white/90 hover:text-white transition-transform focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-black/50 hover:scale-105"
         aria-label="Next photo"
       >
-        ›
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" aria-hidden>
+          <path d="M9 18L15 12L9 6" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+        </svg>
       </button>
 
       <div className="flex h-full items-center justify-center">

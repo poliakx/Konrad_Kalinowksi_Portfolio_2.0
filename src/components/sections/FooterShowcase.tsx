@@ -35,9 +35,9 @@ export default function FooterShowcase() {
           </div>
 
           <Link
-            href="/projects"
+            href="/booking"
             className="group relative block overflow-hidden rounded-lg border border-[#18130f]/10 bg-[#e9e0d7]"
-            aria-label="Check out my projects"
+            aria-label="Book a photo session"
           >
             <div className="relative pb-6 h-[44vw] sm:h-[38vw] md:h-[28rem] lg:h-[34rem]">
               <Image
@@ -54,10 +54,10 @@ export default function FooterShowcase() {
 
               <div className="absolute inset-x-0 bottom-0 flex items-end justify-between p-2">
                 <p className="text-xs sm:text-[0.68rem] uppercase tracking-[0.24em] text-white/85">
-                  Featured project preview
+                  Book a photo session
                 </p>
                 <span className="border border-white/60 px-4 py-2 text-xs uppercase tracking-[0.22em] text-white">
-                  View
+                  Book
                 </span>
               </div>
             </div>

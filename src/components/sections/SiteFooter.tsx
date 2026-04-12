@@ -18,9 +18,9 @@ export default function SiteFooter() {
         </div>
 
         <div className="flex items-center justify-center gap-6">
-          <a href="mailto:hello@konradkalinowski.com" className="transition-opacity hover:opacity-65">
-            hello@konradkalinowski.com
-          </a>
+          <Link href="/contact" className="transition-opacity hover:opacity-65">
+            konradkalinowski.photo@gmail.com
+          </Link>
           <a
             href="https://www.instagram.com/_konradkalinowski.photo/"
             target="_blank"
@@ -40,12 +40,12 @@ export default function SiteFooter() {
       <div className="flex md:hidden mx-auto w-full max-w-xs flex-col items-center gap-3 px-4 py-6 text-center text-black/90">
 
         <div className="mt-3 flex items-center justify-center gap-6">
-          <a href="mailto:hello@konradkalinowski.com" className="opacity-80 hover:opacity-100" aria-label="Email">
+          <Link href="/contact" className="opacity-80 hover:opacity-100" aria-label="Contact">
             <svg width="22" height="18" viewBox="0 0 20 16" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M1 2.5A1.5 1.5 0 0 1 2.5 1h15A1.5 1.5 0 0 1 19 2.5v11A1.5 1.5 0 0 1 17.5 15h-15A1.5 1.5 0 0 1 1 13.5v-11z" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"/>
               <path d="M2 3.5l7 5 7-5" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"/>
             </svg>
-          </a>
+          </Link>
 
           <a href="https://www.instagram.com/_konradkalinowski.photo/" target="_blank" rel="noopener noreferrer" className="opacity-80 hover:opacity-100" aria-label="Instagram">
             <Instagram size={18} />
