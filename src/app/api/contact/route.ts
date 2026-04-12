@@ -24,7 +24,7 @@ export async function POST(request: NextRequest) {
 
     // 🔥 SEND EMAIL
     const { error } = await resend.emails.send({
-      from: "Portfolio Contact <onboarding@resend.dev>", // змінити пізніше
+      from: "Konrad <contact@send.konradkalinowski.pl>", 
       to: process.env.CONTACT_TO_EMAIL!,
       replyTo: email,
       subject: `New message from ${name}`,
