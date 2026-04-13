@@ -17,7 +17,7 @@ export default function FooterShowcase() {
               >
                 “
               </span>
-              <span className="inline">Photography that goes beyond the lens — capturing the story of food, people, places and the moments that connect them.</span>
+              <span className="inline">Photography that goes beyond the lens - capturing the story of food, people, places and the moments that connect them.</span>
               <span
                 className="absolute right-3 text-[1.8em] text-black pointer-events-none"
                 style={{ bottom: 0, transform: "translateY(20%)", lineHeight: 0.9 }}
@@ -34,11 +34,7 @@ export default function FooterShowcase() {
             </Link>
           </div>
 
-          <Link
-            href="/booking"
-            className="group relative block overflow-hidden rounded-lg border border-[#18130f]/10 bg-[#e9e0d7]"
-            aria-label="Book a photo session"
-          >
+          <div className="relative block overflow-hidden rounded-lg border border-[#18130f]/10 bg-[#e9e0d7]">
             <div className="relative pb-6 h-[44vw] sm:h-[38vw] md:h-[28rem] lg:h-[34rem]">
               <Image
                 src="/images/footer/footer-photo.jpg"
@@ -46,22 +42,11 @@ export default function FooterShowcase() {
                 fill
                 loading="lazy"
                 decoding="async"
-                className="object-cover transition-transform duration-700 group-hover:scale-[1.03]"
+                className="object-cover"
                 sizes="(max-width: 1024px) 100vw, 40vw"
               />
-
-              <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-black/10 to-transparent" />
-
-              <div className="absolute inset-x-0 bottom-0 flex items-end justify-between p-2">
-                <p className="text-xs sm:text-[0.68rem] uppercase tracking-[0.24em] text-white/85">
-                  Book a photo session
-                </p>
-                <span className="border border-white/60 px-4 py-2 text-xs uppercase tracking-[0.22em] text-white">
-                  Book
-                </span>
-              </div>
             </div>
-          </Link>
+          </div>
         </div>
       </div>
     </section>

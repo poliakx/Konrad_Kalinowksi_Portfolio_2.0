@@ -40,11 +40,14 @@ export default function AboutIntroSection() {
                 <p className="mb-3 text-[0.68rem] uppercase tracking-[0.34em] text-[#6f6257]">About me</p>
 
                 <p className="mt-4 max-w-[86vw] text-[calc(12px+1.2vw)] leading-6 text-[#5f5348] md:text-sm md:max-w-sm">
-                  In my photography, I focus on the story of the place, the details, and the identity of the venue — images that not only resonate with regular guests but also capture the attention of new ones.
+                  In my photography, I focus on the story of the place, the details and the identity of the venue - images that not only resonate with regular guests but also capture the attention of new ones. They create experiences that stay in people’s memory and engage the senses.
+
+
                 </p>
 
                 <p className="mt-4 text-sm leading-relaxed text-[#53483f] max-w-[56ch]">
-                  Whether you want to improve your menu, strengthen your social media presence, or build a cohesive visual identity, photography is a powerful tool that highlights your culinary skills and supports the growth of your business. I’d love to tell the story of your place through tailored food photography.
+                  Whether you want to improve your menu, strengthen your social media presence or build a cohesive visual identity, photography is a powerful tool that highlights your culinary skills and supports the growth of your business.
+                  I’d love to tell the story of your place through tailored food photography.
                 </p>
 
                 <p className="mt-4 text-sm leading-relaxed text-[#53483f] max-w-[56ch]">
@@ -54,6 +57,9 @@ export default function AboutIntroSection() {
                 <p className="mt-2 text-sm leading-relaxed text-[#53483f] max-w-[56ch]">
                   Because I combine the experience of a professional chef with the work of a photographer, I truly understand the needs of restaurateurs when it comes to capturing the perfect shot.
                 </p>
+
+                <p className="mt-2 text-sm leading-relaxed text-[#53483f] max-w-[56ch]">If you want to do different project together (events, portraits), feel free to contact me and discuss the details.</p>
+
 
                 <div className="mt-6 max-w-[92vw] md:mt-8 md:max-w-xl">
                   <a href="/contact" className="inline-flex w-fit items-center justify-center border border-[#171310] bg-[#171310] px-7 py-3 text-[0.68rem] uppercase tracking-[0.24em] text-white transition-colors hover:opacity-80">
