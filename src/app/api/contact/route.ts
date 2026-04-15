@@ -88,7 +88,7 @@ export async function POST(request: NextRequest) {
 
     const { error } = await resend.emails.send({
       from: "Konrad <contact@konradkalinowski.pl>",
-      to: process.env.CONTACT_TO_EMAIL!,
+      to: "konradkalinowski.photo@gmail.com",
       replyTo: email,
       subject: `New message from ${name}`,
       text: `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`,
