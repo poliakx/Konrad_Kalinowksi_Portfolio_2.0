@@ -17,6 +17,7 @@ export default function SiteNavbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [menuAnimating, setMenuAnimating] = useState(false);
   const [onLightSection, setOnLightSection] = useState(false);
+  const panelRef = useRef<HTMLDivElement | null>(null);
 
   const scrollHomeToTop = (event: ReactMouseEvent<HTMLAnchorElement>) => {
     if (pathname !== "/") return;
@@ -111,8 +112,16 @@ export default function SiteNavbar() {
 
   const closeMenu = () => {
     setMenuAnimating(false);
-    // unmount after animation completes (match duration 300ms)
-    setTimeout(() => setMenuOpen(false), 320);
+
+    const panel = panelRef.current;
+    if (!panel) {
+      setTimeout(() => setMenuOpen(false), 350);
+      return;
+    }
+
+    const cleanup = () => setMenuOpen(false);
+    panel.addEventListener("transitionend", cleanup, { once: true });
+    setTimeout(cleanup, 350);
   };
 
   return (
@@ -189,7 +198,7 @@ export default function SiteNavbar() {
       {/* Overlay menu (mobile) */}
       {menuOpen && (
         <div className={`fixed inset-0 z-50 flex items-start justify-start bg-black/70 text-white backdrop-blur-sm transition-opacity duration-300 ${menuAnimating ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}>
-          <div className={`w-[70vw] sm:w-[80vw] md:w-[90vw] max-w-none bg-black/80 text-white h-full p-6 relative transform transition-transform duration-300 ${menuAnimating ? 'translate-x-0' : '-translate-x-full'}`}>
+          <div ref={panelRef} className={`w-[70vw] sm:w-[80vw] md:w-[90vw] max-w-none bg-black/80 text-white h-full p-6 relative transform transition-transform duration-300 ${menuAnimating ? 'translate-x-0' : '-translate-x-full'}`}>
               <nav className="h-full flex items-start pt-18 relative w-max">
                   <ul className="flex flex-col space-y-6 text-sm uppercase tracking-[0.2em] text-right">
                   <li>
