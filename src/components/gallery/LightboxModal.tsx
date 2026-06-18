@@ -1,6 +1,8 @@
 import Image from "next/image";
 import { useEffect, useRef, useState, type MouseEvent as ReactMouseEvent } from "react";
 
+const FOCUSABLE_SELECTORS = 'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])';
+
 import type { GalleryPhoto } from "./gallery.types";
 
 type LightboxModalProps = {
@@ -20,9 +22,50 @@ export default function LightboxModal({
 }: LightboxModalProps) {
   const [imageNaturalSize, setImageNaturalSize] = useState<{ width: number; height: number } | null>(null);
   const imageFrameRef = useRef<HTMLDivElement | null>(null);
+  const dialogRef = useRef<HTMLDivElement | null>(null);
+  const previouslyFocusedRef = useRef<Element | null>(null);
 
   useEffect(() => {
     setImageNaturalSize(null);
+  }, [activePhotoIndex]);
+
+  useEffect(() => {
+    if (activePhotoIndex === null) return;
+
+    previouslyFocusedRef.current = document.activeElement;
+
+    const getFocusable = () =>
+      Array.from(dialogRef.current?.querySelectorAll<HTMLElement>(FOCUSABLE_SELECTORS) ?? []);
+
+    getFocusable()[0]?.focus();
+
+    const handleTab = (e: KeyboardEvent) => {
+      if (e.key !== "Tab") return;
+      const elements = getFocusable();
+      if (!elements.length) return;
+
+      const first = elements[0];
+      const last = elements[elements.length - 1];
+
+      if (e.shiftKey) {
+        if (document.activeElement === first) {
+          e.preventDefault();
+          last.focus();
+        }
+      } else {
+        if (document.activeElement === last) {
+          e.preventDefault();
+          first.focus();
+        }
+      }
+    };
+
+    document.addEventListener("keydown", handleTab);
+
+    return () => {
+      document.removeEventListener("keydown", handleTab);
+      (previouslyFocusedRef.current as HTMLElement | null)?.focus();
+    };
   }, [activePhotoIndex]);
 
   if (activePhotoIndex === null) {
@@ -64,6 +107,7 @@ export default function LightboxModal({
 
   return (
     <div
+      ref={dialogRef}
       className="fixed inset-0 z-[90] bg-black/90 p-4 md:p-8"
       onClick={onClose}
       role="dialog"
