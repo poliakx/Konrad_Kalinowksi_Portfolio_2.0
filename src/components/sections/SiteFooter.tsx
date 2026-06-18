@@ -1,9 +1,9 @@
 import Link from "next/link";
 import { Instagram } from "lucide-react";
 import { SITE_CONFIG } from "@/src/config/site";
+import CurrentYear from "@/src/components/ui/CurrentYear";
 
 export default function SiteFooter() {
-  const year = new Date().getFullYear();
 
   return (
     <footer className="border-t border-black/15 bg-white text-black">
@@ -33,7 +33,7 @@ export default function SiteFooter() {
         </div>
 
         <div className="flex items-center justify-end gap-6">
-          <p>All rights reserved {year}</p>
+          <p>All rights reserved <CurrentYear /></p>
         </div>
       </div>
 
@@ -53,7 +53,7 @@ export default function SiteFooter() {
           </a>
         </div>
 
-        <p className="mt-3 text-xs text-black/60">© {year} Konrad Kalinowski</p>
+        <p className="mt-3 text-xs text-black/60">© <CurrentYear /> Konrad Kalinowski</p>
         
       </div>
     </footer>
