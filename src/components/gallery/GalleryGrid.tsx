@@ -25,7 +25,6 @@ export default function GalleryGrid({ photos, onPhotoClick }: GalleryGridProps) 
                    alt={photo.alt}
                    fill
                    loading={index === 0 ? "eager" : "lazy"}
-                   priority={index === 0}
                    className="object-cover transition-transform duration-500 group-hover:scale-105"
                    sizes="(max-width: 640px) 100vw, (max-width: 1279px) 50vw, 25vw"
                  />
