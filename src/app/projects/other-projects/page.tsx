@@ -5,20 +5,20 @@ import { getGalleryPhotos } from "@/src/lib/cloudinary";
 export const revalidate = 60;
 
 export const metadata: Metadata = {
-  title: "Other Projects",
+  title: "People & Places",
   description:
-    "Explore the other projects gallery by Konrad Kalinowski with selected creative and editorial visuals.",
+    "Explore the people and places gallery by Konrad Kalinowski — portraits, events, and lifestyle visuals.",
   openGraph: {
-    title: "Other Projects | Konrad Kalinowski",
+    title: "People & Places | Konrad Kalinowski",
     description:
-      "Explore the other projects gallery by Konrad Kalinowski with selected creative and editorial visuals.",
+      "Explore the people and places gallery by Konrad Kalinowski — portraits, events, and lifestyle visuals.",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Other Projects | Konrad Kalinowski",
+    title: "People & Places | Konrad Kalinowski",
     description:
-      "Explore the other projects gallery by Konrad Kalinowski with selected creative and editorial visuals.",
+      "Explore the people and places gallery by Konrad Kalinowski — portraits, events, and lifestyle visuals.",
   },
 };
 

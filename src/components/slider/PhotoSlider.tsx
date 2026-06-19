@@ -23,7 +23,6 @@ export default function PhotoSlider({ photos }: { photos: SliderPhoto[] }) {
 
   const startXRef = useRef(0);
   const startYRef = useRef(0);
-  const startTranslateRef = useRef(0);
 
   // inertia
   const velocityRef = useRef(0);
@@ -135,8 +134,7 @@ export default function PhotoSlider({ photos }: { photos: SliderPhoto[] }) {
 
   const handlePointerDown = (e: React.PointerEvent<HTMLDivElement>) => {
     const viewport = viewportRef.current;
-    const track = trackRef.current;
-    if (!viewport || !track) return;
+    if (!viewport) return;
 
     pointerDownRef.current = true;
     isDraggingRef.current = false;
@@ -144,7 +142,6 @@ export default function PhotoSlider({ photos }: { photos: SliderPhoto[] }) {
 
     startXRef.current = e.clientX;
     startYRef.current = e.clientY;
-    startTranslateRef.current = Number(track.dataset.translateX) || 0;
 
     lastPointerXRef.current = e.clientX;
     lastPointerTsRef.current = performance.now();
@@ -184,15 +181,16 @@ export default function PhotoSlider({ photos }: { photos: SliderPhoto[] }) {
       isDraggingRef.current = true;
     }
 
-    const nextTranslate = startTranslateRef.current + dx;
-    setTranslate(nextTranslate);
-
+    // Use incremental delta to avoid crossing the normalization boundary mid-drag,
+    // which would cause a visual jump when translateX wraps around.
     const now = performance.now();
-    const deltaX = e.clientX - lastPointerXRef.current;
-    const deltaT = (now - lastPointerTsRef.current) / 1000;
+    const incrementalDx = e.clientX - lastPointerXRef.current;
+    const currentTranslate = Number(trackRef.current?.dataset.translateX) || 0;
+    setTranslate(currentTranslate + incrementalDx);
 
+    const deltaT = (now - lastPointerTsRef.current) / 1000;
     if (deltaT > 0) {
-      velocityRef.current = deltaX / deltaT;
+      velocityRef.current = incrementalDx / deltaT;
     }
 
     lastPointerXRef.current = e.clientX;
@@ -279,18 +277,19 @@ export default function PhotoSlider({ photos }: { photos: SliderPhoto[] }) {
   return (
     <section
       id="slider-section"
-      className="relative flex min-h-[100svh] items-center overflow-hidden bg-[#f6f3ee] pt-12 pb-6 sm:py-16 md:py-0 md:pt-[8rem] md:pb-12 lg:pt-40 lg:pb-16"
+      className="relative flex min-h-[100svh] items-center overflow-hidden bg-[#f7f5f1] pt-12 pb-6 sm:py-16 md:py-0 md:pt-[8rem] md:pb-12 lg:pt-40 lg:pb-16"
     >
       <div className="relative flex h-full items-center justify-start px-0 md:justify-start md:px-0">
         <div
           ref={viewportRef}
-          className="flex h-full w-full items-center overflow-hidden px-0 cursor-grab active:cursor-grabbing"
+          className="flex h-full w-full items-center overflow-hidden px-0 cursor-grab active:cursor-grabbing select-none"
           onPointerDown={handlePointerDown}
           onPointerMove={handlePointerMove}
           onPointerUp={handlePointerUp}
           onPointerCancel={handlePointerCancel}
           onWheel={handleWheel}
           onContextMenu={handleContextMenu}
+          onDragStart={(e) => e.preventDefault()}
           style={{
             touchAction: "pan-y",
           }}
@@ -308,6 +307,7 @@ export default function PhotoSlider({ photos }: { photos: SliderPhoto[] }) {
                 key={`${photo.src}-${index}`}
                 className="relative w-[80vw] aspect-[3/4] shrink-0 overflow-hidden sm:w-[48vw] md:h-[72vh] md:w-[36vw] md:aspect-[4/3]"
                 style={{ minHeight: "220px" }}
+                draggable={false}
               >
                 <CldImage
                   src={photo.src}
@@ -325,8 +325,8 @@ export default function PhotoSlider({ photos }: { photos: SliderPhoto[] }) {
         </div>
       </div>
 
-      <div className="pointer-events-none absolute left-0 top-0 z-50 hidden h-full w-24 bg-gradient-to-r from-[#f6f3ee] to-transparent md:block" />
-      <div className="pointer-events-none absolute right-0 top-0 z-50 hidden h-full w-24 bg-gradient-to-l from-[#f6f3ee] to-transparent md:block" />
+      <div className="pointer-events-none absolute left-0 top-0 z-50 hidden h-full w-24 bg-gradient-to-r from-[#f7f5f1] to-transparent md:block" />
+      <div className="pointer-events-none absolute right-0 top-0 z-50 hidden h-full w-24 bg-gradient-to-l from-[#f7f5f1] to-transparent md:block" />
     </section>
   );
 }

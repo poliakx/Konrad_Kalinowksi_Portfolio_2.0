@@ -31,11 +31,11 @@ body {
 @keyframes scrollHint {
   0%,
   100% {
-    transform: translate(-50%, 0);
+    transform: translateY(0);
     opacity: 0.75;
   }
   50% {
-    transform: translate(-50%, 6px);
+    transform: translateY(6px);
     opacity: 1;
   }
 }

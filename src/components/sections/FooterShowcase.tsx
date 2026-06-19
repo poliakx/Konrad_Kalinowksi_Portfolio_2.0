@@ -3,15 +3,9 @@ import Link from "next/link";
 
 export default function FooterShowcase() {
   return (
-    <section className="relative bg-white md:pt-20">
+    <section className="relative">
 
-      {/* Mobile: inset card with rounded corners */}
-      {/* Desktop: full-bleed */}
-      <Link
-        href="/projects"
-        aria-label="Open Projects"
-        className="group block relative w-full overflow-hidden h-[100svh] sm:h-[60vw] md:h-[38rem] lg:h-[46rem]"
-      >
+      <div className="group relative w-full overflow-hidden h-[100svh] sm:h-[60vw] md:h-[38rem] lg:h-[46rem]">
         <CldStaticImage
           src="footer-photo_qufa7h"
           alt="Featured portfolio preview image from Konrad Kalinowski projects"
@@ -21,21 +15,34 @@ export default function FooterShowcase() {
           sizes="100vw"
         />
 
-        {/* Mobile: always-visible bottom label */}
-        <div className="absolute inset-x-0 bottom-0 md:hidden bg-gradient-to-t from-black/65 to-transparent pt-14 pb-5 px-5 flex items-end justify-between">
-          <span className="text-white text-xs uppercase tracking-[0.2em] font-light">Open Projects</span>
-          <svg width="16" height="10" viewBox="0 0 16 10" fill="none" aria-hidden="true" className="text-white mb-0.5">
-            <path d="M1 5h14M10 1l4 4-4 4" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
-          </svg>
+        {/* Hover overlay — text centered over full image, desktop only */}
+        <div className="absolute inset-0 bg-black/0 md:group-hover:bg-black/50 transition-colors duration-500 pointer-events-none flex items-center justify-center">
+          <div className="text-center px-6 w-full max-w-4xl opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-500">
+            <p className="text-white/70 text-xs uppercase tracking-[0.25em] font-light mb-3">
+              Let&apos;s work together
+            </p>
+            <h2 className="text-white text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-light leading-tight">
+              Food, Drinks & People<br /> Photography.
+            </h2>
+          </div>
         </div>
 
-        {/* Desktop: hover overlay */}
-        <div className="hidden md:flex absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-colors duration-500 items-center justify-center">
-          <span className="opacity-0 group-hover:opacity-100 transition-opacity duration-500 text-white text-sm uppercase tracking-[0.2em] font-light">
-            Open Projects
-          </span>
+        {/* Bottom gradient — always visible */}
+        <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/70 to-transparent h-1/3 pointer-events-none" />
+
+        {/* Get in Touch button — always visible, bottom right */}
+        <div className="absolute bottom-7 right-6 sm:bottom-8 sm:right-10 md:bottom-12 md:right-14">
+          <Link
+            href="/contact"
+            className="inline-flex items-center gap-3 border border-white bg-transparent px-6 py-3 text-sm uppercase tracking-[0.18em] text-white transition-opacity hover:opacity-70 whitespace-nowrap"
+          >
+            Get in Touch
+            <svg width="16" height="10" viewBox="0 0 16 10" fill="none" aria-hidden="true">
+              <path d="M1 5h14M10 1l4 4-4 4" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          </Link>
         </div>
-      </Link>
+      </div>
 
     </section>
   );

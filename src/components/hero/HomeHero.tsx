@@ -26,7 +26,7 @@ export default function HomeHero() {
       <div className="absolute inset-0 z-10 flex items-center justify-end">
 
         {/* TEXT BLOCK */}
-        <div className="max-w-[900px] mx-auto text-center lg:text-right text-white sm:pr-[5%] md:pr-0 transform lg:mx-0 lg:absolute lg:top-1/2 lg:right-[8%] lg:-translate-y-1/2">
+        <div className="max-w-[900px] mx-auto text-center lg:text-right text-white sm:pr-[5%] md:pr-0 lg:mx-0 lg:absolute lg:top-1/2 lg:right-0 lg:pr-[8%] lg:-translate-y-1/2">
 
           <h1 className="font-light leading-[0.9] text-5xl sm:text-[clamp(3rem,8vw,5rem)] lg:text-[clamp(2rem,5vw,5rem)] uppercase">
             Konrad <br />
@@ -41,7 +41,7 @@ export default function HomeHero() {
             FOOD, DRINKS & PEOPLE
           </p>
 
-          {/* Mobile-only: Open Projects button (smaller, lower, transparent, white text and border) */}
+          {/* Mobile-only: Open Projects button */}
           <div className="mt-8 sm:hidden flex justify-center">
             <Link
               href="/projects"
@@ -51,13 +51,28 @@ export default function HomeHero() {
             </Link>
           </div>
 
+          {/* Desktop/tablet: View Projects button */}
+          <div className="mt-8 hidden sm:flex justify-center lg:justify-end">
+            <Link
+              href="/projects"
+              className="inline-flex items-center justify-center border border-white bg-transparent px-8 py-2.5 text-sm uppercase tracking-[0.18em] text-white transition-opacity hover:opacity-80"
+            >
+              View Projects
+            </Link>
+          </div>
+
         </div>
 
       </div>
 
       {/* SCROLL INDICATOR */}
-      <div aria-hidden="true" className="scroll-indicator absolute bottom-6 left-1/2 -translate-x-1/2 text-white text-xs sm:text-sm tracking-[0.3em]">
-        SCROLL
+      <div aria-hidden="true" className="pointer-events-none absolute inset-0 flex items-end justify-center pb-6">
+        <div className="scroll-indicator flex flex-col items-center gap-1.5 text-white text-xs sm:text-sm tracking-[0.3em]">
+          <span>SCROLL</span>
+          <svg className="animate-bounce" width="12" height="8" viewBox="0 0 12 8" fill="none">
+            <path d="M1 1l5 5 5-5" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/>
+          </svg>
+        </div>
       </div>
 
     </section>

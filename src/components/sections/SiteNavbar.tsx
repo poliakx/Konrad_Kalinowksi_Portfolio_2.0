@@ -135,8 +135,8 @@ export default function SiteNavbar() {
           <div className="relative flex items-center justify-between w-full">
 
             {/* LOGO (desktop) */}
-            <Link href="/" onClick={scrollHomeToTop} className="text-sm font-light uppercase tracking-[0.35em] hidden md:inline-block">
-              HOME
+            <Link href="/" onClick={scrollHomeToTop} className="text-sm font-light uppercase tracking-[0.18em] hidden md:inline-block">
+              Konrad Kalinowski
             </Link>
 
             {/* CENTER NAV (desktop only) */}
@@ -159,8 +159,8 @@ export default function SiteNavbar() {
             {/* MOBILE BAR: Hamburger (left), Home (center), Instagram (right) */}
             <div className="flex w-full items-center md:hidden">
               <div className="flex-shrink-0">
-                <Link href="/" onClick={scrollHomeToTop} className="text-sm uppercase tracking-[0.2em] hover:opacity-70 transition">
-                  HOME
+                <Link href="/" onClick={scrollHomeToTop} className="text-sm font-light uppercase tracking-[0.3em] hover:opacity-70 transition">
+                  KK
                 </Link>
               </div>
 

@@ -49,6 +49,7 @@ export default function ProjectsPage() {
                   <h2 className="mt-2 text-2xl font-light uppercase tracking-[0.08em] text-white md:text-3xl">
                     Food & Drinks
                   </h2>
+                  <p className="mt-1.5 text-[0.62rem] text-white/55 tracking-[0.12em] font-light">Warsaw restaurants · Editorial styling · Commercial</p>
                 </div>
                 
               </div>
@@ -75,8 +76,9 @@ export default function ProjectsPage() {
                     Collection
                   </p>
                   <h2 className="mt-2 text-2xl font-light uppercase tracking-[0.08em] text-white md:text-3xl">
-                    Other Projects
+                    People & Places
                   </h2>
+                  <p className="mt-1.5 text-[0.62rem] text-white/55 tracking-[0.12em] font-light">Portraits · Events · Lifestyle</p>
                 </div>
                 
               </div>

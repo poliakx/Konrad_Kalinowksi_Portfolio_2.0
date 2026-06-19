@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 
 import HomeHero from "@/src/components/hero/HomeHero";
 import FooterShowcase from "@/src/components/sections/FooterShowcase";
+import HomeIntroSection from "@/src/components/sections/HomeIntroSection";
 import PhotoSlider from "@/src/components/slider/PhotoSlider";
 import { getSliderPhotos } from "@/src/lib/cloudinary";
 
@@ -34,6 +35,7 @@ export default async function Home() {
     <>
       <HomeHero />
       <PhotoSlider photos={sliderPhotos} />
+      <HomeIntroSection />
       <FooterShowcase />
     </>
   );

@@ -38,8 +38,10 @@ export default function AboutIntroSection() {
 
               <div className="flex min-h-[40vh] md:min-h-[460px] flex-col p-4 md:p-8 lg:p-12 items-start justify-start text-left">
                 <p className="mb-3 text-[0.68rem] uppercase tracking-[0.34em] text-[#6f6257]">About me</p>
+                <h1 className="text-2xl md:text-3xl font-light uppercase tracking-[0.06em] leading-tight text-[#171310]">Konrad Kalinowski</h1>
+                <p className="mt-1 mb-4 text-[0.68rem] uppercase tracking-[0.22em] text-[#6f6257]">Food Photographer · Warsaw</p>
 
-                <p className="mt-4 max-w-[86vw] text-[calc(12px+1.2vw)] leading-6 text-[#5f5348] md:text-sm md:max-w-sm">
+                <p className="mt-2 max-w-[86vw] text-[calc(12px+1.2vw)] leading-6 text-[#5f5348] md:text-sm md:max-w-sm">
                   In my photography, I focus on the story of the place, the details and the identity of the venue - images that not only resonate with regular guests but also capture the attention of new ones. They create experiences that stay in people’s memory and engage the senses.
 
 
