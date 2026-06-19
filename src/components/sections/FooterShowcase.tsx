@@ -3,14 +3,14 @@ import Link from "next/link";
 
 export default function FooterShowcase() {
   return (
-    <section className="relative bg-white pt-14 pb-6 md:pt-20 md:pb-0">
+    <section className="relative bg-white md:pt-20">
 
       {/* Mobile: inset card with rounded corners */}
       {/* Desktop: full-bleed */}
       <Link
         href="/projects"
         aria-label="Open Projects"
-        className="group block relative mx-4 overflow-hidden rounded-2xl h-[78vw] sm:h-[60vw] md:mx-0 md:rounded-none md:h-[38rem] lg:h-[46rem]"
+        className="group block relative w-full overflow-hidden h-[100svh] sm:h-[60vw] md:h-[38rem] lg:h-[46rem]"
       >
         <CldStaticImage
           src="footer-photo_qufa7h"
