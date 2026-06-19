@@ -33,7 +33,7 @@ export default function ProjectsPage() {
           >
             <div className="relative h-[26rem] md:h-[34rem]">
               <CldStaticImage
-                src="sections/food-photo"
+                src="food-photo_acw1ob"
                 alt="Food photography project collection cover image"
                 fill
                 loading="eager"
@@ -61,7 +61,7 @@ export default function ProjectsPage() {
           >
             <div className="relative h-[26rem] md:h-[34rem]">
               <CldStaticImage
-                src="sections/other-projects"
+                src="other-projects_w85yog"
                 alt="Other creative projects collection cover image"
                 fill
                 loading="lazy"

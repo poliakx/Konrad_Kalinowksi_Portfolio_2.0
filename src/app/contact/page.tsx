@@ -31,7 +31,7 @@ export default function ContactPage() {
           <div className="grid lg:grid-cols-[1fr_1.08fr]">
             <div className="relative hidden lg:block lg:min-h-[360px]">
               <CldStaticImage
-                src="hero/konrad-kalinowski-food-hero1"
+                src="footer-photo_qufa7h"
                 alt="Photographer working with a professional camera"
                 fill
                 loading="eager"

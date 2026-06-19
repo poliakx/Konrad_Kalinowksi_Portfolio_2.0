@@ -23,6 +23,6 @@ export const metadata: Metadata = {
 };
 
 export default async function FoodPhotoPage() {
-  const photos = await getGalleryPhotos("konrad/gallery/food");
+  const photos = await getGalleryPhotos("konrad/gallery/food photos");
   return <PhotoGallery photos={photos} />;
 }

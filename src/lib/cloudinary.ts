@@ -5,7 +5,7 @@ type CloudinaryResource = {
   context?: { custom?: { alt?: string } };
 };
 
-async function listFolder(folder: string): Promise<CloudinaryResource[]> {
+async function listAssetFolder(folder: string): Promise<CloudinaryResource[]> {
   const cloudName = process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME;
   const apiKey = process.env.CLOUDINARY_API_KEY;
   const apiSecret = process.env.CLOUDINARY_API_SECRET;
@@ -13,17 +13,19 @@ async function listFolder(folder: string): Promise<CloudinaryResource[]> {
   if (!cloudName || !apiKey || !apiSecret) return [];
 
   const credentials = Buffer.from(`${apiKey}:${apiSecret}`).toString("base64");
-  const params = new URLSearchParams({
-    prefix: folder,
-    type: "upload",
-    max_results: "500",
-    context: "true",
-  });
 
   const res = await fetch(
-    `https://api.cloudinary.com/v1_1/${cloudName}/resources/image?${params}`,
+    `https://api.cloudinary.com/v1_1/${cloudName}/resources/search`,
     {
-      headers: { Authorization: `Basic ${credentials}` },
+      method: "POST",
+      headers: {
+        Authorization: `Basic ${credentials}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        expression: `asset_folder="${folder}"`,
+        max_results: 500,
+      }),
       next: { revalidate: 60 },
     }
   );
@@ -34,7 +36,7 @@ async function listFolder(folder: string): Promise<CloudinaryResource[]> {
 }
 
 export async function getGalleryPhotos(folder: string): Promise<GalleryPhoto[]> {
-  const resources = await listFolder(folder);
+  const resources = await listAssetFolder(folder);
   return resources.map((r, i) => ({
     src: r.public_id,
     alt: r.context?.custom?.alt ?? "Photography by Konrad Kalinowski",
@@ -43,7 +45,7 @@ export async function getGalleryPhotos(folder: string): Promise<GalleryPhoto[]> 
 }
 
 export async function getSliderPhotos(): Promise<{ src: string; alt: string }[]> {
-  const resources = await listFolder("konrad/slider");
+  const resources = await listAssetFolder("konrad/slider");
   resources.sort((a, b) => a.public_id.localeCompare(b.public_id));
   return resources.map((r) => ({
     src: r.public_id,

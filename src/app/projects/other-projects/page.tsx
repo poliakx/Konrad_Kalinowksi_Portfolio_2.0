@@ -23,6 +23,6 @@ export const metadata: Metadata = {
 };
 
 export default async function OtherProjectsPage() {
-  const photos = await getGalleryPhotos("konrad/gallery/other");
+  const photos = await getGalleryPhotos("konrad/gallery/other projects");
   return <PhotoGallery photos={photos} />;
 }
