@@ -3,6 +3,9 @@ import type { Metadata } from "next";
 import HomeHero from "@/src/components/hero/HomeHero";
 import FooterShowcase from "@/src/components/sections/FooterShowcase";
 import PhotoSlider from "@/src/components/slider/PhotoSlider";
+import { getSliderPhotos } from "@/src/lib/cloudinary";
+
+export const revalidate = 60;
 
 export const metadata: Metadata = {
   title: {
@@ -24,11 +27,13 @@ export const metadata: Metadata = {
   },
 };
 
-export default function Home() {
+export default async function Home() {
+  const sliderPhotos = await getSliderPhotos();
+
   return (
     <>
       <HomeHero />
-      <PhotoSlider />
+      <PhotoSlider photos={sliderPhotos} />
       <FooterShowcase />
     </>
   );

@@ -1,4 +1,4 @@
-import Image from "next/image";
+import CldStaticImage from "@/src/components/ui/CldStaticImage";
 import Link from "next/link";
 
 export default function FooterShowcase() {
@@ -7,12 +7,11 @@ export default function FooterShowcase() {
 
       {/* Full-bleed image — links to projects */}
       <Link href="/projects" aria-label="Open Projects" className="group block relative w-full overflow-hidden h-[68vw] sm:h-[55vw] md:h-[38rem] lg:h-[46rem]">
-        <Image
-          src="/images/footer/footer-photo.jpg"
+        <CldStaticImage
+          src="footer/footer-photo"
           alt="Featured portfolio preview image from Konrad Kalinowski projects"
           fill
           loading="lazy"
-          decoding="async"
           className="object-cover transition-transform duration-700 ease-in-out group-hover:scale-[1.02]"
           sizes="100vw"
         />
@@ -22,7 +21,6 @@ export default function FooterShowcase() {
           </span>
         </div>
       </Link>
-
 
     </section>
   );

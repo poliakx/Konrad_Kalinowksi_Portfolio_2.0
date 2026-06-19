@@ -1,21 +1,20 @@
 "use client";
 
-import Image from "next/image";
-import { useRef, useEffect, useState } from "react";
-import { sliderPhotos } from "@/src/data/slider";
+import { CldImage } from "next-cloudinary";
+import { useRef, useEffect } from "react";
 
 const SPEED_PX_PER_SEC = 50;
 
-export default function PhotoSlider() {
-  const duplicatedPhotos = [...sliderPhotos, ...sliderPhotos];
+type SliderPhoto = { src: string; alt: string };
+
+export default function PhotoSlider({ photos }: { photos: SliderPhoto[] }) {
+  const duplicatedPhotos = [...photos, ...photos];
 
   const viewportRef = useRef<HTMLDivElement | null>(null);
   const trackRef = useRef<HTMLDivElement | null>(null);
 
   const rafRef = useRef<number | null>(null);
   const lastTs = useRef<number | null>(null);
-
-  const [isMobile, setIsMobile] = useState(false);
 
   // manual hold / drag state
   const pointerDownRef = useRef(false);
@@ -69,16 +68,6 @@ export default function PhotoSlider() {
       return mobile ? SPEED_PX_PER_SEC * 0.55 : SPEED_PX_PER_SEC;
     })();
 
-    let mq: MediaQueryList | undefined;
-    let update: (() => void) | undefined;
-
-    if (typeof window !== "undefined") {
-      mq = window.matchMedia?.("(max-width: 768px)");
-      update = () => setIsMobile(!!(mq ? mq.matches : "ontouchstart" in window));
-      update();
-      mq?.addEventListener?.("change", update as EventListener);
-    }
-
     const step = (ts: number) => {
       if (lastTs.current === null) lastTs.current = ts;
 
@@ -126,8 +115,6 @@ export default function PhotoSlider() {
     rafRef.current = requestAnimationFrame(step);
 
     return () => {
-      mq?.removeEventListener?.("change", update as EventListener);
-
       if (rafRef.current !== null) {
         cancelAnimationFrame(rafRef.current);
       }
@@ -322,23 +309,15 @@ export default function PhotoSlider() {
                 className="relative w-[80vw] aspect-[3/4] shrink-0 overflow-hidden sm:w-[48vw] md:h-[72vh] md:w-[36vw] md:aspect-[4/3]"
                 style={{ minHeight: "220px" }}
               >
-                <Image
+                <CldImage
                   src={photo.src}
                   alt={photo.alt}
                   fill
-                  loading={photo.src === "/images/slider/photo-1.jpg" ? "eager" : (index < 2 ? "eager" : "lazy")}
-                  decoding="async"
-                  className="pointer-events-none object-cover object-center"
+                  loading={index < 3 ? "eager" : "lazy"}
+                  className="pointer-events-none object-cover object-center select-none"
                   draggable={false}
-                  onContextMenu={(e) => e.preventDefault()}
-                  style={{
-                    WebkitTouchCallout: "none",
-                    WebkitUserSelect: "none",
-                    userSelect: "none",
-                  }}
+                  onContextMenu={(e: React.MouseEvent) => e.preventDefault()}
                   sizes="(max-width: 640px) 95vw, (max-width: 1024px) 48vw, 36vw"
-                  quality={isMobile ? 60 : 80}
-                  priority={index === 0}
                 />
               </div>
             ))}

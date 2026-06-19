@@ -1,5 +1,5 @@
 import Link from "next/link";
-import Image from "next/image";
+import CldStaticImage from "@/src/components/ui/CldStaticImage";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -32,12 +32,11 @@ export default function ProjectsPage() {
             className="group relative block overflow-hidden rounded-2xl border border-[#171310]/10 bg-[#ece7e0]"
           >
             <div className="relative h-[26rem] md:h-[34rem]">
-              <Image
-                src="/images/section-icons/food-photo.jpg"
+              <CldStaticImage
+                src="sections/food-photo"
                 alt="Food photography project collection cover image"
                 fill
                 loading="eager"
-                decoding="async"
                 className="object-cover transition-transform duration-500 group-hover:scale-105"
                 sizes="(max-width: 640px) 100vw, 50vw"
               />
@@ -61,12 +60,11 @@ export default function ProjectsPage() {
             className="group relative block overflow-hidden rounded-2xl border border-[#171310]/10 bg-[#ece7e0]"
           >
             <div className="relative h-[26rem] md:h-[34rem]">
-              <Image
-                src="/images/section-icons/other-projects.jpg"
+              <CldStaticImage
+                src="sections/other-projects"
                 alt="Other creative projects collection cover image"
                 fill
                 loading="lazy"
-                decoding="async"
                 className="object-cover transition-transform duration-500 group-hover:scale-105"
                 sizes="(max-width: 640px) 100vw, 50vw"
               />

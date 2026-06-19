@@ -1,4 +1,4 @@
-import Image from "next/image";
+import { CldImage } from "next-cloudinary";
 import { useEffect, useRef, useState, type MouseEvent as ReactMouseEvent } from "react";
 
 const FOCUSABLE_SELECTORS = 'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])';
@@ -156,7 +156,7 @@ export default function LightboxModal({
           className="relative h-[94vh] w-[96vw] max-w-6xl"
           onClick={handleLightboxContentClick}
         >
-          <Image
+          <CldImage
             src={activePhoto.src}
             alt={activePhoto.alt}
             fill
@@ -168,7 +168,6 @@ export default function LightboxModal({
               });
             }}
             loading="eager"
-            decoding="async"
             className="object-contain"
             sizes="100vw"
           />

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import Image from "next/image";
+import CldStaticImage from "@/src/components/ui/CldStaticImage";
 import ContactForm from "@/src/components/contact/ContactForm";
 
 export const metadata: Metadata = {
@@ -30,11 +30,11 @@ export default function ContactPage() {
         <section id="contact" className="relative scroll-mt-24 md:scroll-mt-32 overflow-hidden border border-[#171310]/12 bg-[#f6f2ec]/95 shadow-[0_18px_60px_rgba(23,19,16,0.08)]">
           <div className="grid lg:grid-cols-[1fr_1.08fr]">
             <div className="relative hidden lg:block lg:min-h-[360px]">
-              <Image
-                src="/images/hero/konrad-kalinowski-food-hero1.jpg"
+              <CldStaticImage
+                src="hero/konrad-kalinowski-food-hero1"
                 alt="Photographer working with a professional camera"
                 fill
-                priority
+                loading="eager"
                 className="object-cover"
                 sizes="(max-width: 1024px) 0px, 44vw"
               />

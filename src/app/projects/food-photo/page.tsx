@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import PhotoGallery from "@/src/components/gallery/PhotoGallery";
-import { foodGalleryPhotos } from "@/src/data/gallery";
+import { getGalleryPhotos } from "@/src/lib/cloudinary";
+
+export const revalidate = 60;
 
 export const metadata: Metadata = {
   title: "Food Photo",
@@ -20,6 +22,7 @@ export const metadata: Metadata = {
   },
 };
 
-export default function FoodPhotoPage() {
-  return <PhotoGallery photos={foodGalleryPhotos} />;
+export default async function FoodPhotoPage() {
+  const photos = await getGalleryPhotos("konrad/gallery/food");
+  return <PhotoGallery photos={photos} />;
 }

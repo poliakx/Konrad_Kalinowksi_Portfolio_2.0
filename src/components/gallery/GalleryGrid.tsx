@@ -1,4 +1,4 @@
-import Image from "next/image";
+import { CldImage } from "next-cloudinary";
 
 import type { GalleryPhoto } from "./gallery.types";
 
@@ -20,13 +20,12 @@ export default function GalleryGrid({ photos, onPhotoClick }: GalleryGridProps) 
             aria-label={`Open ${photo.alt}`}
           >
             <div className="relative h-full w-full">
-                 <Image
+                 <CldImage
                    src={photo.src}
                    alt={photo.alt}
                    fill
                    loading={index === 0 ? "eager" : "lazy"}
                    priority={index === 0}
-                   decoding="async"
                    className="object-cover transition-transform duration-500 group-hover:scale-105"
                    sizes="(max-width: 640px) 100vw, (max-width: 1279px) 50vw, 25vw"
                  />
