@@ -3,7 +3,7 @@
 import { CldImage } from "next-cloudinary";
 import { useRef, useEffect } from "react";
 
-const SPEED_PX_PER_SEC = 50;
+const SPEED_PX_PER_SEC = 75;
 
 type SliderPhoto = { src: string; alt: string };
 

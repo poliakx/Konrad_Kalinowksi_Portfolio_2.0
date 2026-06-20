@@ -47,9 +47,9 @@ export default function ProjectsPage() {
                     Collection
                   </p>
                   <h2 className="mt-2 text-2xl font-light uppercase tracking-[0.08em] text-white md:text-3xl">
-                    Food & Drinks
+                    Food
                   </h2>
-                  <p className="mt-1.5 text-[0.62rem] text-white/55 tracking-[0.12em] font-light">Warsaw restaurants · Editorial styling · Commercial</p>
+                  <p className="mt-1.5 text-[0.62rem] text-white/55 tracking-[0.12em] font-light">Dishes · Editorial styling · Restaurant</p>
                 </div>
                 
               </div>
@@ -76,11 +76,66 @@ export default function ProjectsPage() {
                     Collection
                   </p>
                   <h2 className="mt-2 text-2xl font-light uppercase tracking-[0.08em] text-white md:text-3xl">
-                    People & Places
+                    Places
                   </h2>
-                  <p className="mt-1.5 text-[0.62rem] text-white/55 tracking-[0.12em] font-light">Portraits · Events · Lifestyle</p>
+                  <p className="mt-1.5 text-[0.62rem] text-white/55 tracking-[0.12em] font-light">Architecture · Interiors · Urban</p>
                 </div>
                 
+              </div>
+            </div>
+          </Link>
+          <Link
+            href="/projects/people"
+            className="group relative block overflow-hidden rounded-2xl border border-[#171310]/10 bg-[#ece7e0]"
+          >
+            <div className="relative h-[26rem] md:h-[34rem]">
+              <CldStaticImage
+                src="untitled-00448_twwcsm_yqssx1"
+                alt="People photography project collection cover image"
+                fill
+                loading="lazy"
+                className="object-cover transition-transform duration-500 group-hover:scale-105"
+                sizes="(max-width: 640px) 100vw, (max-width: 1280px) 50vw, 33vw"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/20 to-transparent" />
+              <div className="absolute inset-x-0 bottom-0 flex items-end justify-between p-6">
+                <div>
+                  <p className="text-[0.68rem] uppercase tracking-[0.26em] text-white/75">
+                    Collection
+                  </p>
+                  <h2 className="mt-2 text-2xl font-light uppercase tracking-[0.08em] text-white md:text-3xl">
+                    People
+                  </h2>
+                  <p className="mt-1.5 text-[0.62rem] text-white/55 tracking-[0.12em] font-light">Portraits · Events · Commercial</p>
+                </div>
+              </div>
+            </div>
+          </Link>
+
+          <Link
+            href="/projects/drinks"
+            className="group relative block overflow-hidden rounded-2xl border border-[#171310]/10 bg-[#ece7e0]"
+          >
+            <div className="relative h-[26rem] md:h-[34rem]">
+              <CldStaticImage
+                src="WARMUT_DRINK_2_tgw7n1"
+                alt="Drinks photography project collection cover image"
+                fill
+                loading="lazy"
+                className="object-cover transition-transform duration-500 group-hover:scale-105"
+                sizes="(max-width: 640px) 100vw, (max-width: 1280px) 50vw, 33vw"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/20 to-transparent" />
+              <div className="absolute inset-x-0 bottom-0 flex items-end justify-between p-6">
+                <div>
+                  <p className="text-[0.68rem] uppercase tracking-[0.26em] text-white/75">
+                    Collection
+                  </p>
+                  <h2 className="mt-2 text-2xl font-light uppercase tracking-[0.08em] text-white md:text-3xl">
+                    Drinks
+                  </h2>
+                  <p className="mt-1.5 text-[0.62rem] text-white/55 tracking-[0.12em] font-light">Cocktails · Spirits · Bar visuals</p>
+                </div>
               </div>
             </div>
           </Link>
