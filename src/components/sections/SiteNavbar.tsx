@@ -1,29 +1,40 @@
 "use client";
 
-import { useEffect, useState, useRef, type MouseEvent as ReactMouseEvent } from "react";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { useEffect, useState, useRef, useTransition, type MouseEvent as ReactMouseEvent } from "react";
+import { useTranslations, useLocale } from "next-intl";
+import { Link, usePathname, useRouter } from "@/src/i18n/navigation";
 import { Instagram } from "lucide-react";
 import { SITE_CONFIG } from "@/src/config/site";
 
-const navItems = [
-  { label: "Projects", href: "/projects" },
-  { label: "About", href: "/about" },
-  { label: "Contact", href: "/contact" },
-];
-
 export default function SiteNavbar() {
+  const t = useTranslations("Navbar");
+  const locale = useLocale();
   const pathname = usePathname();
+  const router = useRouter();
+  const [isPending, startTransition] = useTransition();
+
   const [menuOpen, setMenuOpen] = useState(false);
   const [menuAnimating, setMenuAnimating] = useState(false);
   const [onLightSection, setOnLightSection] = useState(false);
   const panelRef = useRef<HTMLDivElement | null>(null);
+
+  const navItems = [
+    { label: t("projects"), href: "/projects" },
+    { label: t("about"), href: "/about" },
+    { label: t("contact"), href: "/contact" },
+  ];
 
   const scrollHomeToTop = (event: ReactMouseEvent<HTMLAnchorElement>) => {
     if (pathname !== "/") return;
 
     event.preventDefault();
     window.scrollTo({ top: 0, behavior: "auto" });
+  };
+
+  const switchLocale = (nextLocale: string) => {
+    startTransition(() => {
+      router.replace(pathname, { locale: nextLocale });
+    });
   };
 
   useEffect(() => {
@@ -47,9 +58,7 @@ export default function SiteNavbar() {
     const pending = { timer: null as number | null, lastDesired: null as boolean | null };
 
     const scheduleSet = (desired: boolean) => {
-      // if already scheduled for same desired state, keep it
       if (pending.lastDesired === desired && pending.timer) return;
-      // clear existing
       if (pending.timer) {
         window.clearTimeout(pending.timer);
         pending.timer = null;
@@ -62,14 +71,12 @@ export default function SiteNavbar() {
     };
 
     const updateNavbarState = () => {
-      // If hero exists, consider navbar "light" when NOT over the hero
       if (heroSection) {
         const onHero = isCenterInside(heroSection);
         scheduleSet(!onHero);
         return;
       }
 
-      // fallback: keep previous behavior (light on slider/footer)
       const onSlider = sliderSection ? isCenterInside(sliderSection) : false;
       const onFooter = footerSection ? isCenterInside(footerSection) : false;
 
@@ -88,7 +95,6 @@ export default function SiteNavbar() {
     };
   }, [pathname]);
 
-  // Lock body scroll when mobile menu is open
   useEffect(() => {
     const previousOverflow = document.body.style.overflow;
 
@@ -103,10 +109,8 @@ export default function SiteNavbar() {
     };
   }, [menuOpen]);
 
-  // handle open/close with animation
   const openMenu = () => {
     setMenuOpen(true);
-    // allow the element to mount before starting animation
     requestAnimationFrame(() => setMenuAnimating(true));
   };
 
@@ -146,7 +150,6 @@ export default function SiteNavbar() {
                   <li key={item.href}>
                     <Link
                       href={item.href}
-                      onClick={item.label === "Home" ? scrollHomeToTop : undefined}
                       className="text-sm uppercase tracking-[0.2em] transition-opacity hover:opacity-70"
                     >
                       {item.label}
@@ -156,7 +159,7 @@ export default function SiteNavbar() {
               </ul>
             </nav>
 
-            {/* MOBILE BAR: Hamburger (left), Home (center), Instagram (right) */}
+            {/* MOBILE BAR */}
             <div className="flex w-full items-center md:hidden">
               <div className="flex-shrink-0">
                 <Link href="/" onClick={scrollHomeToTop} className="text-sm font-light uppercase tracking-[0.3em] hover:opacity-70 transition">
@@ -166,6 +169,7 @@ export default function SiteNavbar() {
 
               <div className="ml-8 flex-shrink-0">
                 <button
+                  type="button"
                   onClick={() => (menuOpen ? closeMenu() : openMenu())}
                   aria-label={menuOpen ? "Close menu" : "Open menu"}
                   className="inline-flex items-center gap-2 rounded-md px-3 py-2 text-sm"
@@ -182,23 +186,45 @@ export default function SiteNavbar() {
               <div className="flex-1" />
             </div>
 
-            {/* INSTAGRAM (desktop) */}
-            <Link
-              href={SITE_CONFIG.instagramUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hidden md:inline-flex hover:opacity-70 transition"
-            >
-              <Instagram size={22} strokeWidth={1.5} />
-            </Link>
+            {/* RIGHT SIDE (desktop): Language switcher + Instagram */}
+            <div className="hidden md:flex items-center gap-5">
+              <div className="flex items-center gap-1.5 text-[0.65rem] uppercase tracking-[0.18em]">
+                <button
+                  type="button"
+                  onClick={() => switchLocale("en")}
+                  disabled={isPending || locale === "en"}
+                  className={locale === "en" ? "opacity-100 font-medium" : "opacity-40 hover:opacity-70 transition-opacity"}
+                >
+                  EN
+                </button>
+                <span className="opacity-25">/</span>
+                <button
+                  type="button"
+                  onClick={() => switchLocale("pl")}
+                  disabled={isPending || locale === "pl"}
+                  className={locale === "pl" ? "opacity-100 font-medium" : "opacity-40 hover:opacity-70 transition-opacity"}
+                >
+                  PL
+                </button>
+              </div>
+
+              <Link
+                href={SITE_CONFIG.instagramUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:opacity-70 transition"
+              >
+                <Instagram size={22} strokeWidth={1.5} />
+              </Link>
+            </div>
           </div>
         </div>
       </header>
 
       {/* Overlay menu (mobile) */}
       {menuOpen && (
-        <div className={`fixed inset-0 z-50 flex items-start justify-start bg-black/70 text-white backdrop-blur-sm transition-opacity duration-300 ${menuAnimating ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}>
-          <div ref={panelRef} className={`w-[70vw] sm:w-[80vw] md:w-[90vw] max-w-none bg-black/80 text-white h-full p-6 relative transform transition-transform duration-300 ${menuAnimating ? 'translate-x-0' : '-translate-x-full'}`}>
+        <div className={`fixed inset-0 z-50 flex items-start justify-start bg-black/70 text-white backdrop-blur-sm transition-opacity duration-300 ${menuAnimating ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"}`}>
+          <div ref={panelRef} className={`w-[70vw] sm:w-[80vw] md:w-[90vw] max-w-none bg-black/80 text-white h-full p-6 relative transform transition-transform duration-300 ${menuAnimating ? "translate-x-0" : "-translate-x-full"}`}>
               <nav className="h-full flex items-start pt-18 relative w-max">
                   <ul className="flex flex-col space-y-6 text-sm uppercase tracking-[0.2em] text-right">
                   <li>
@@ -210,7 +236,7 @@ export default function SiteNavbar() {
                       }}
                       className="block opacity-100"
                     >
-                      Home
+                      {t("home")}
                     </Link>
                   </li>
                   {navItems.map((item) => (
@@ -227,6 +253,7 @@ export default function SiteNavbar() {
                 </ul>
 
                 <button
+                  type="button"
                   onClick={() => closeMenu()}
                   aria-label="Close menu"
                   className="absolute top-2 right-0 translate-x-6 px-3 py-2 text-white"
@@ -248,12 +275,33 @@ export default function SiteNavbar() {
                   <Instagram size={24} strokeWidth={1.6} />
                 </a>
 
-                <Link href="/contact" aria-label="Contact" className="hover:opacity-80 transition w-10 h-10 flex items-center justify-center rounded-md">
+                <Link href="/contact" aria-label="Contact" onClick={() => setMenuOpen(false)} className="hover:opacity-80 transition w-10 h-10 flex items-center justify-center rounded-md">
                   <svg width="22" height="18" viewBox="0 0 20 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M1 2.5A1.5 1.5 0 0 1 2.5 1h15A1.5 1.5 0 0 1 19 2.5v11A1.5 1.5 0 0 1 17.5 15h-15A1.5 1.5 0 0 1 1 13.5v-11z" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"/>
                     <path d="M2 3.5l7 5 7-5" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"/>
                   </svg>
                 </Link>
+
+                {/* Language switcher in mobile menu */}
+                <div className="ml-auto flex items-center gap-2 text-[0.65rem] uppercase tracking-[0.18em]">
+                  <button
+                    type="button"
+                    onClick={() => { switchLocale("en"); closeMenu(); }}
+                    disabled={isPending || locale === "en"}
+                    className={locale === "en" ? "opacity-100 font-medium" : "opacity-40 hover:opacity-70 transition-opacity"}
+                  >
+                    EN
+                  </button>
+                  <span className="opacity-25">/</span>
+                  <button
+                    type="button"
+                    onClick={() => { switchLocale("pl"); closeMenu(); }}
+                    disabled={isPending || locale === "pl"}
+                    className={locale === "pl" ? "opacity-100 font-medium" : "opacity-40 hover:opacity-70 transition-opacity"}
+                  >
+                    PL
+                  </button>
+                </div>
               </div>
             </div>
           </div>

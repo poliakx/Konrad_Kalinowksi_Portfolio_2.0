@@ -46,7 +46,9 @@ export async function getGalleryPhotos(folder: string): Promise<GalleryPhoto[]> 
 
 export async function getSliderPhotos(): Promise<{ src: string; alt: string }[]> {
   const resources = await listAssetFolder("konrad/slider");
-  resources.sort((a, b) => a.public_id.localeCompare(b.public_id));
+  resources.sort((a, b) =>
+    a.public_id.localeCompare(b.public_id, undefined, { numeric: true, sensitivity: "base" })
+  );
   return resources.map((r) => ({
     src: r.public_id,
     alt: r.context?.custom?.alt ?? "Photography by Konrad Kalinowski",

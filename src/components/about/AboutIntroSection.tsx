@@ -1,13 +1,17 @@
 "use client";
 
+import { useTranslations } from "next-intl";
+import { Link } from "@/src/i18n/navigation";
 import { CldImage } from "next-cloudinary";
 
 export default function AboutIntroSection() {
+  const t = useTranslations("About");
+
   return (
     <section className="bg-[#f7f5f1] px-4 pt-[calc(4rem+env(safe-area-inset-top))] pb-8 md:px-8 md:pt-20">
       <div className="mx-auto w-full max-w-7xl">
         <div className="relative mx-auto w-full">
-          {/* Mobile: show photo above the card for proportional modernist layout */}
+          {/* Mobile: show photo above the card */}
           <div className="block lg:hidden mb-6 pt-[calc(2rem+env(safe-area-inset-top))]">
             <div className="relative w-full overflow-hidden h-[70vw] sm:h-[56vw]">
               <CldImage
@@ -37,42 +41,40 @@ export default function AboutIntroSection() {
               </div>
 
               <div className="flex min-h-[40vh] md:min-h-[460px] flex-col p-4 md:p-8 lg:p-12 items-start justify-start text-left">
-                <p className="mb-3 text-[0.68rem] uppercase tracking-[0.34em] text-[#6f6257]">About me</p>
+                <p className="mb-3 text-[0.68rem] uppercase tracking-[0.34em] text-[#6f6257]">{t("label")}</p>
                 <h1 className="text-2xl md:text-3xl font-light uppercase tracking-[0.06em] leading-tight text-[#171310]">Konrad Kalinowski</h1>
-                <p className="mt-1 mb-4 text-[0.68rem] uppercase tracking-[0.22em] text-[#6f6257]">Food Photographer · Warsaw</p>
+                <p className="mt-1 mb-4 text-[0.68rem] uppercase tracking-[0.22em] text-[#6f6257]">{t("subtitle")}</p>
 
-                <p className="mt-2 max-w-[86vw] text-[calc(12px+1.2vw)] leading-6 text-[#5f5348] md:text-sm md:max-w-sm">
-                  In my photography, I focus on the story of the place, the details and the identity of the venue - images that not only resonate with regular guests but also capture the attention of new ones. They create experiences that stay in people’s memory and engage the senses.
-
-
+                <p className="mt-2 text-[15px] leading-[1.75] text-[#5f5348] max-w-[52ch]">
+                  {t("p1")}
                 </p>
 
-                <p className="mt-4 text-sm leading-relaxed text-[#53483f] max-w-[56ch]">
-                  Whether you want to improve your menu, strengthen your social media presence or build a cohesive visual identity, photography is a powerful tool that highlights your culinary skills and supports the growth of your business.
-                  I’d love to tell the story of your place through tailored food photography.
+                <p className="mt-4 text-[15px] leading-[1.75] text-[#53483f] max-w-[52ch]">
+                  {t("p2")}
                 </p>
 
-                <p className="mt-4 text-sm leading-relaxed text-[#53483f] max-w-[56ch]">
-                  <strong>Why me?</strong>
+                <p className="mt-5 text-[15px] leading-[1.75] text-[#53483f] max-w-[52ch]">
+                  <strong>{t("whyMe")}</strong>
                 </p>
 
-                <p className="mt-2 text-sm leading-relaxed text-[#53483f] max-w-[56ch]">
-                  Because I combine the experience of a professional chef with the work of a photographer, I truly understand the needs of restaurateurs when it comes to capturing the perfect shot.
+                <p className="mt-2 text-[15px] leading-[1.75] text-[#53483f] max-w-[52ch]">
+                  {t("p3")}
                 </p>
 
-                <p className="mt-2 text-sm leading-relaxed text-[#53483f] max-w-[56ch]">If you want to do different project together (events, portraits), feel free to contact me and discuss the details.</p>
-
+                <p className="mt-3 text-[15px] leading-[1.75] text-[#53483f] max-w-[52ch]">
+                  {t("p4")}
+                </p>
 
                 <div className="mt-6 max-w-[92vw] md:mt-8 md:max-w-xl">
-                  <a href="/contact" className="inline-flex w-fit items-center justify-center border border-[#171310] bg-[#171310] px-7 py-3 text-[0.68rem] uppercase tracking-[0.24em] text-white transition-colors hover:opacity-80">
-                    Get in touch
-                  </a>
+                  <Link href="/contact" className="inline-flex w-fit items-center justify-center border border-[#171310] bg-[#171310] px-7 py-3 text-[0.68rem] uppercase tracking-[0.24em] text-white transition-colors hover:opacity-80">
+                    {t("cta")}
+                  </Link>
                 </div>
               </div>
             </div>
           </section>
           <div className="mt-4 flex items-center justify-between border-t border-[#171310]/12 pt-2 text-[0.62rem] uppercase tracking-[0.22em] text-[#6f6257]">
-          <p>Konrad Kalinowski</p>
+            <p>Konrad Kalinowski</p>
           </div>
         </div>
       </div>

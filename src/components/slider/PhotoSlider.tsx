@@ -29,13 +29,15 @@ export default function PhotoSlider({ photos }: { photos: SliderPhoto[] }) {
   const lastPointerXRef = useRef(0);
   const lastPointerTsRef = useRef(0);
   const inertiaVelocityRef = useRef(0);
+  const pointerHistoryRef = useRef<{ x: number; t: number }[]>([]);
 
   // touchpad / wheel gesture
   const wheelHoldTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  const DRAG_THRESHOLD_PX = 8;
-  const INERTIA_FRICTION = 0.92;
+  const DRAG_THRESHOLD_PX = 4;
+  const INERTIA_FRICTION = 0.94;
   const MIN_INERTIA_SPEED = 8;
+  const VELOCITY_WINDOW_MS = 80;
 
   const normalizeTranslate = (value: number, half: number) => {
     if (!half) return value;
@@ -147,6 +149,7 @@ export default function PhotoSlider({ photos }: { photos: SliderPhoto[] }) {
     lastPointerTsRef.current = performance.now();
     velocityRef.current = 0;
     inertiaVelocityRef.current = 0;
+    pointerHistoryRef.current = [{ x: e.clientX, t: performance.now() }];
 
     viewport.setPointerCapture?.(e.pointerId);
   };
@@ -188,10 +191,10 @@ export default function PhotoSlider({ photos }: { photos: SliderPhoto[] }) {
     const currentTranslate = Number(trackRef.current?.dataset.translateX) || 0;
     setTranslate(currentTranslate + incrementalDx);
 
-    const deltaT = (now - lastPointerTsRef.current) / 1000;
-    if (deltaT > 0) {
-      velocityRef.current = incrementalDx / deltaT;
-    }
+    pointerHistoryRef.current.push({ x: e.clientX, t: now });
+    pointerHistoryRef.current = pointerHistoryRef.current.filter(
+      (p) => now - p.t < VELOCITY_WINDOW_MS
+    );
 
     lastPointerXRef.current = e.clientX;
     lastPointerTsRef.current = now;
@@ -211,7 +214,15 @@ export default function PhotoSlider({ photos }: { photos: SliderPhoto[] }) {
     isHoldingRef.current = false;
 
     if (wasDragging) {
-      inertiaVelocityRef.current = velocityRef.current;
+      const history = pointerHistoryRef.current;
+      if (history.length >= 2) {
+        const newest = history[history.length - 1];
+        const oldest = history[0];
+        const dt = (newest.t - oldest.t) / 1000;
+        inertiaVelocityRef.current = dt > 0 ? (newest.x - oldest.x) / dt : 0;
+      } else {
+        inertiaVelocityRef.current = velocityRef.current;
+      }
     } else {
       velocityRef.current = 0;
     }

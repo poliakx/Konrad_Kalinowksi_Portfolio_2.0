@@ -1,9 +1,12 @@
+"use client";
 
-"use client"
-import Link from "next/link";
+import { useTranslations } from "next-intl";
+import { Link } from "@/src/i18n/navigation";
 import { CldImage } from "next-cloudinary";
 
 export default function HomeHero() {
+  const t = useTranslations("Hero");
+
   return (
     <section id="hero-section"
       className="relative w-full overflow-hidden bg-black px-6 sm:px-10 md:px-20 lg:px-24 min-h-[100svh]"
@@ -12,7 +15,7 @@ export default function HomeHero() {
       {/* IMAGE */}
       <CldImage
         src="Artboard_1_jgoyzb"
-        alt="Hero banner featuring styled food photography by Konrad Kalinowski"
+        alt={t("imageAlt")}
         fill
         sizes="100vw"
         priority
@@ -34,30 +37,30 @@ export default function HomeHero() {
           </h1>
 
           <p className="tracking-[0.4em] text-white/70 text-xs sm:text-sm md:text-sm mb-4">
-            Photography
+            {t("photography")}
           </p>
 
           <p className="mt-6 tracking-[0.3em] text-xs sm:text-sm md:text-xs text-neutral-300">
-            FOOD, DRINKS & PEOPLE
+            {t("tagline")}
           </p>
 
-          {/* Mobile-only: Open Projects button */}
+          {/* Mobile-only button */}
           <div className="mt-8 sm:hidden flex justify-center">
             <Link
               href="/projects"
               className="inline-flex items-center justify-center border border-white bg-transparent px-6 py-2 text-sm uppercase tracking-[0.18em] text-white transition-opacity hover:opacity-80"
             >
-              Open Projects
+              {t("openProjects")}
             </Link>
           </div>
 
-          {/* Desktop/tablet: View Projects button */}
+          {/* Desktop/tablet button */}
           <div className="mt-8 hidden sm:flex justify-center lg:justify-end">
             <Link
               href="/projects"
               className="inline-flex items-center justify-center border border-white bg-transparent px-8 py-2.5 text-sm uppercase tracking-[0.18em] text-white transition-opacity hover:opacity-80"
             >
-              View Projects
+              {t("viewProjects")}
             </Link>
           </div>
 
@@ -68,7 +71,7 @@ export default function HomeHero() {
       {/* SCROLL INDICATOR */}
       <div aria-hidden="true" className="pointer-events-none absolute inset-0 flex items-end justify-center pb-6">
         <div className="scroll-indicator flex flex-col items-center gap-1.5 text-white text-xs sm:text-sm tracking-[0.3em]">
-          <span>SCROLL</span>
+          <span>{t("scroll")}</span>
           <svg className="animate-bounce" width="12" height="8" viewBox="0 0 12 8" fill="none">
             <path d="M1 1l5 5 5-5" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/>
           </svg>

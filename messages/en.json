@@ -1,0 +1,90 @@
+{
+  "Navbar": {
+    "projects": "Projects",
+    "about": "About",
+    "contact": "Contact",
+    "home": "Home"
+  },
+  "Footer": {
+    "home": "Home",
+    "projects": "Projects",
+    "allRightsReserved": "All rights reserved"
+  },
+  "Hero": {
+    "photography": "Photography",
+    "tagline": "FOOD, DRINKS & PEOPLE",
+    "openProjects": "Open Projects",
+    "viewProjects": "View Projects",
+    "scroll": "SCROLL",
+    "imageAlt": "Hero banner featuring styled food photography by Konrad Kalinowski"
+  },
+  "Intro": {
+    "label": "The work",
+    "text": "I focus on the story of the place — the details, the light, the identity of the venue. As a photographer with a chef's background, I understand what makes a dish worth remembering.",
+    "aboutLink": "About Konrad"
+  },
+  "Showcase": {
+    "letsWork": "Let's work together",
+    "headline": "Food, Drinks & People",
+    "subheadline": "Photography.",
+    "getInTouch": "Get in Touch"
+  },
+  "About": {
+    "label": "About me",
+    "subtitle": "Food Photographer · Warsaw",
+    "p1": "In my photography, I focus on the story of the place, the details and the identity of the venue - images that not only resonate with regular guests but also capture the attention of new ones. They create experiences that stay in people's memory and engage the senses.",
+    "p2": "Whether you want to improve your menu, strengthen your social media presence or build a cohesive visual identity, photography is a powerful tool that highlights your culinary skills and supports the growth of your business. I'd love to tell the story of your place through tailored food photography.",
+    "whyMe": "Why me?",
+    "p3": "Because I combine the experience of a professional chef with the work of a photographer, I truly understand the needs of restaurateurs when it comes to capturing the perfect shot.",
+    "p4": "If you want to do different project together (events, portraits), feel free to contact me and discuss the details.",
+    "cta": "Get in touch"
+  },
+  "Contact": {
+    "label": "Contact Me",
+    "titleLine1": "Let's Connect, Collaborate,",
+    "titleLine2": "and Create Together",
+    "subtitle": "Share your project details and I'll reply with availability, timeline, and next steps."
+  },
+  "ContactForm": {
+    "nameLabel": "Name",
+    "namePlaceholder": "Your name",
+    "emailLabel": "Email",
+    "emailPlaceholder": "your@email.com",
+    "messageLabel": "Message",
+    "messagePlaceholder": "Tell me about your project...",
+    "send": "Send Message",
+    "sending": "Sending...",
+    "sent": "Message sent!",
+    "thankYou": "Thank you! I'll get back to you soon."
+  },
+  "Projects": {
+    "collection": "Collection",
+    "food": "Food",
+    "places": "Places",
+    "people": "People",
+    "drinks": "Drinks",
+    "foodSub": "Dishes · Editorial styling · Restaurant",
+    "placesSub": "Architecture · Interiors · Urban",
+    "peopleSub": "Portraits · Events · Commercial",
+    "drinksSub": "Cocktails · Spirits · Bar visuals"
+  },
+  "Metadata": {
+    "siteTitle": "Konrad Kalinowski | Visual Portfolio",
+    "homeTitle": "Konrad Kalinowski | Food & Editorial Photography Portfolio",
+    "homeDescription": "Discover the visual portfolio of Konrad Kalinowski, from editorial food photography to modern creative projects.",
+    "aboutTitle": "About",
+    "aboutDescription": "About Konrad Kalinowski and the story behind his photography portfolio.",
+    "contactTitle": "Contact",
+    "contactDescription": "Get in touch with Konrad Kalinowski for photography commissions, collaborations, or any enquiries.",
+    "projectsTitle": "Projects",
+    "projectsDescription": "Browse project collections including food photography and other creative visual work by Konrad Kalinowski.",
+    "foodTitle": "Food Photo",
+    "foodDescription": "Explore the complete food photography gallery by Konrad Kalinowski, featuring editorial dishes, cocktails, and restaurant visuals.",
+    "placesTitle": "People & Places",
+    "placesDescription": "Explore the people and places gallery by Konrad Kalinowski — portraits, events, and lifestyle visuals.",
+    "peopleTitle": "People",
+    "peopleDescription": "Explore the people photography gallery by Konrad Kalinowski — portraits, events, and lifestyle visuals.",
+    "drinksTitle": "Drinks",
+    "drinksDescription": "Explore the drinks photography gallery by Konrad Kalinowski — cocktails, spirits, and bar visuals."
+  }
+}

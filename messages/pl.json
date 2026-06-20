@@ -1,0 +1,91 @@
+
+{
+  "Navbar": {
+    "projects": "Projekty",
+    "about": "O mnie",
+    "contact": "Kontakt",
+    "home": "Strona główna"
+  },
+  "Footer": {
+    "home": "Strona główna",
+    "projects": "Projekty",
+    "allRightsReserved": "Wszelkie prawa zastrzeżone"
+  },
+  "Hero": {
+    "photography": "Fotografia",
+    "tagline": "JEDZENIE, NAPOJE I LUDZIE",
+    "openProjects": "Projekty",
+    "viewProjects": "Zobacz projekty",
+    "scroll": "PRZEWIŃ",
+    "imageAlt": "Baner z autorską fotografią kulinarną Konrada Kalinowskiego"
+  },
+  "Intro": {
+    "label": "Realizacje",
+    "text": "Fotografia to dla mnie sposób na pokazanie charakteru miejsca. Skupiam się na świetle, detalach i atmosferze, tworząc obrazy, które przyciągają uwagę i budują autentyczny wizerunek marki.",
+    "aboutLink": "O mnie"
+  },
+  "Showcase": {
+    "letsWork": "Współpraca",
+    "headline": "Jedzenie, napoje",
+    "subheadline": "i ludzie",
+    "getInTouch": "Skontaktuj się"
+  },
+  "About": {
+    "label": "O mnie",
+    "subtitle": "Fotograf kulinarny · Warszawa",
+    "p1": "W swojej pracy skupiam się na opowiadaniu historii miejsc poprzez światło, detale i atmosferę. Tworzę zdjęcia, które przyciągają uwagę, budują emocje i pomagają restauracjom wyróżnić się na tle konkurencji.",
+    "p2": "Niezależnie od tego, czy chcesz odświeżyć menu, zadbać o profesjonalny wizerunek w mediach społecznościowych czy stworzyć spójną identyfikację wizualną swojej marki — odpowiednia fotografia może realnie wspierać rozwój Twojego biznesu. Chętnie pomogę pokazać charakter Twojego miejsca.",
+    "whyMe": "Dlaczego warto ze mną współpracować?",
+    "p3": "Przez lata pracowałem jako szef kuchni, dlatego doskonale rozumiem gastronomię od środka. Wiem, jak prezentować jedzenie, aby wyglądało apetycznie i jednocześnie pozostało autentyczne.",
+    "p4": "Realizuję również inne projekty fotograficzne — od portretów po relacje z wydarzeń. Jeśli masz pomysł na współpracę, zapraszam do kontaktu.",
+    "cta": "Skontaktuj się"
+  },
+  "Contact": {
+    "label": "Kontakt",
+    "titleLine1": "Porozmawiajmy",
+    "titleLine2": "o Twoim projekcie",
+    "subtitle": "Napisz kilka słów o swoim pomyśle lub marce. Odpowiem z informacją o dostępnych terminach i możliwościach współpracy."
+  },
+  "ContactForm": {
+    "nameLabel": "Imię",
+    "namePlaceholder": "Twoje imię",
+    "emailLabel": "Email",
+    "emailPlaceholder": "twoj@email.com",
+    "messageLabel": "Wiadomość",
+    "messagePlaceholder": "Opowiedz mi o swoim projekcie...",
+    "send": "Wyślij wiadomość",
+    "sending": "Wysyłam...",
+    "sent": "Wiadomość wysłana!",
+    "thankYou": "Dziękuję! Odezwę się wkrótce."
+  },
+  "Projects": {
+    "collection": "Kolekcja",
+    "food": "Kulinaria",
+    "places": "Miejsca",
+    "people": "Ludzie",
+    "drinks": "Napoje",
+    "foodSub": "Dania · Stylizacja · Restauracje",
+    "placesSub": "Architektura · Wnętrza · Miasto",
+    "peopleSub": "Portrety · Wydarzenia · Projekty komercyjne",
+    "drinksSub": "Koktajle · Alkohole · Bary"
+  },
+  "Metadata": {
+    "siteTitle": "Konrad Kalinowski | Portfolio Wizualne",
+    "homeTitle": "Konrad Kalinowski | Fotografia Kulinarna i Komercyjna",
+    "homeDescription": "Portfolio fotograficzne Konrada Kalinowskiego. Fotografia kulinarna, wizerunkowa i komercyjna dla restauracji, marek oraz biznesów.",
+    "aboutTitle": "O mnie",
+    "aboutDescription": "Poznaj Konrada Kalinowskiego — fotografa kulinarnego z doświadczeniem w gastronomii.",
+    "contactTitle": "Kontakt",
+    "contactDescription": "Skontaktuj się w sprawie współpracy, sesji fotograficznych lub indywidualnych projektów.",
+    "projectsTitle": "Projekty",
+    "projectsDescription": "Wybrane realizacje fotograficzne obejmujące gastronomię, ludzi, miejsca i napoje.",
+    "foodTitle": "Fotografia kulinarna",
+    "foodDescription": "Zdjęcia dań, produktów, menu restauracyjnych i materiałów promocyjnych dla gastronomii.",
+    "placesTitle": "Miejsca",
+    "placesDescription": "Fotografia wnętrz, lokali, przestrzeni komercyjnych i miejsc tworzonych z charakterem.",
+    "peopleTitle": "Ludzie",
+    "peopleDescription": "Portrety, reportaże i fotografia wizerunkowa dla osób oraz marek.",
+    "drinksTitle": "Napoje",
+    "drinksDescription": "Fotografia koktajli, alkoholi, kawy i materiałów wizualnych dla barów oraz producentów."
+  }
+}

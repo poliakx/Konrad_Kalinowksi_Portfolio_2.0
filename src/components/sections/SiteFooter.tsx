@@ -1,9 +1,11 @@
-import Link from "next/link";
+import { useTranslations } from "next-intl";
+import { Link } from "@/src/i18n/navigation";
 import { Instagram } from "lucide-react";
 import { SITE_CONFIG } from "@/src/config/site";
 import CurrentYear from "@/src/components/ui/CurrentYear";
 
 export default function SiteFooter() {
+  const t = useTranslations("Footer");
 
   return (
     <footer className="border-t border-black/15 bg-white text-black">
@@ -11,10 +13,10 @@ export default function SiteFooter() {
       <div className="hidden md:grid mx-auto w-full max-w-7xl gap-6 px-6 py-7 text-[0.7rem] uppercase tracking-[0.24em] text-black/60 md:grid-cols-3 md:items-center md:px-10">
         <div className="flex items-center gap-6">
           <Link href="/" className="transition-opacity hover:opacity-65">
-            Home
+            {t("home")}
           </Link>
           <Link href="/projects" className="transition-opacity hover:opacity-65">
-            Projects
+            {t("projects")}
           </Link>
         </div>
 
@@ -33,11 +35,11 @@ export default function SiteFooter() {
         </div>
 
         <div className="flex items-center justify-end gap-6">
-          <p>All rights reserved <CurrentYear /></p>
+          <p>{t("allRightsReserved")} <CurrentYear /></p>
         </div>
       </div>
 
-      {/* Mobile footer: centered, minimalist (logo, small text, social icons, copyright, credit) */}
+      {/* Mobile footer */}
       <div className="flex md:hidden mx-auto w-full max-w-xs flex-col items-center gap-3 px-4 py-6 text-center text-black/90">
 
         <div className="mt-3 flex items-center justify-center gap-6">
@@ -54,7 +56,7 @@ export default function SiteFooter() {
         </div>
 
         <p className="mt-3 text-xs text-black/60">© <CurrentYear /> Konrad Kalinowski</p>
-        
+
       </div>
     </footer>
   );

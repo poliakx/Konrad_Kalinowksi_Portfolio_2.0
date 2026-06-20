@@ -1,4 +1,7 @@
 import type { NextConfig } from "next";
+import createNextIntlPlugin from "next-intl/plugin";
+
+const withNextIntl = createNextIntlPlugin("./src/i18n/request.ts");
 
 const nextConfig: NextConfig = {
   allowedDevOrigins: [
@@ -7,9 +10,8 @@ const nextConfig: NextConfig = {
     "http://192.168.34.7:3000",
   ],
   images: {
-    // Configure allowed output quality values used by next/image
     qualities: [60, 75, 80],
   },
 };
 
-export default nextConfig;
+export default withNextIntl(nextConfig);
