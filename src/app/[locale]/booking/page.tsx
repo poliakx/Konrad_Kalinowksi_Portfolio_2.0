@@ -1,11 +1,10 @@
-import type { Metadata } from "next";
-import { redirect } from "@/src/i18n/navigation";
+import { redirect } from "next/navigation";
 
-export const metadata: Metadata = {
-  title: "Booking",
-  description: "Book a photo session with Konrad Kalinowski.",
-};
-
-export default function BookingPage() {
-  redirect("/");
+export default async function BookingPage({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
+  redirect(`/${locale}`);
 }
