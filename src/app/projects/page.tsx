@@ -62,7 +62,7 @@ export default function ProjectsPage() {
           >
             <div className="relative h-[26rem] md:h-[34rem]">
               <CldStaticImage
-                src="other-projects_w85yog"
+                src="20-5_aujjgr_lbpydf"
                 alt="Other creative projects collection cover image"
                 fill
                 loading="lazy"
@@ -90,7 +90,7 @@ export default function ProjectsPage() {
           >
             <div className="relative h-[26rem] md:h-[34rem]">
               <CldStaticImage
-                src="untitled-00448_twwcsm_yqssx1"
+                src="ARCZI_PROFIL_whdxb0_ctpeup"
                 alt="People photography project collection cover image"
                 fill
                 loading="lazy"
@@ -118,7 +118,7 @@ export default function ProjectsPage() {
           >
             <div className="relative h-[26rem] md:h-[34rem]">
               <CldStaticImage
-                src="WARMUT_DRINK_2_tgw7n1"
+                src="WARMUT_DRINK_rssirp_1_ixmiwe"
                 alt="Drinks photography project collection cover image"
                 fill
                 loading="lazy"
