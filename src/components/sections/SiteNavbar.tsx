@@ -184,6 +184,26 @@ export default function SiteNavbar() {
               </div>
 
               <div className="flex-1" />
+
+              <div className="flex items-center gap-1.5 text-[0.65rem] uppercase tracking-[0.18em]">
+                <button
+                  type="button"
+                  onClick={() => switchLocale("en")}
+                  disabled={isPending || locale === "en"}
+                  className={locale === "en" ? "opacity-100 font-medium" : "opacity-40 hover:opacity-70 transition-opacity"}
+                >
+                  EN
+                </button>
+                <span className="opacity-25">/</span>
+                <button
+                  type="button"
+                  onClick={() => switchLocale("pl")}
+                  disabled={isPending || locale === "pl"}
+                  className={locale === "pl" ? "opacity-100 font-medium" : "opacity-40 hover:opacity-70 transition-opacity"}
+                >
+                  PL
+                </button>
+              </div>
             </div>
 
             {/* RIGHT SIDE (desktop): Language switcher + Instagram */}
@@ -283,7 +303,7 @@ export default function SiteNavbar() {
                 </Link>
 
                 {/* Language switcher in mobile menu */}
-                <div className="ml-auto flex items-center gap-2 text-[0.65rem] uppercase tracking-[0.18em]">
+                <div className="flex items-center gap-2 text-[0.65rem] uppercase tracking-[0.18em]">
                   <button
                     type="button"
                     onClick={() => { switchLocale("en"); closeMenu(); }}
