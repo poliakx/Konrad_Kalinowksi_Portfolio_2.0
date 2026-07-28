@@ -21,7 +21,7 @@
   },
   "Intro": {
     "label": "Realizacje",
-    "text": "Fotografia to dla mnie sposób na pokazanie charakteru miejsca. Skupiam się na świetle, detalach i atmosferze, tworząc obrazy, które przyciągają uwagę i budują autentyczny wizerunek marki.",
+    "text": "W swojej fotografii skupiam się na opowiedzeniu historii, detalach oraz autentyczności.",
     "aboutLink": "O mnie"
   },
   "Showcase": {
@@ -33,18 +33,18 @@
   "About": {
     "label": "O mnie",
     "subtitle": "Fotograf kulinarny · Warszawa",
-    "p1": "W swojej pracy skupiam się na opowiadaniu historii miejsc poprzez światło, detale i atmosferę. Tworzę zdjęcia, które przyciągają uwagę, budują emocje i pomagają restauracjom wyróżnić się na tle konkurencji.",
-    "p2": "Niezależnie od tego, czy chcesz odświeżyć menu, zadbać o profesjonalny wizerunek w mediach społecznościowych czy stworzyć spójną identyfikację wizualną swojej marki — odpowiednia fotografia może realnie wspierać rozwój Twojego biznesu. Chętnie pomogę pokazać charakter Twojego miejsca.",
-    "whyMe": "Dlaczego warto ze mną współpracować?",
-    "p3": "Przez lata pracowałem jako szef kuchni, dlatego doskonale rozumiem gastronomię od środka. Wiem, jak prezentować jedzenie, aby wyglądało apetycznie i jednocześnie pozostało autentyczne.",
-    "p4": "Realizuję również inne projekty fotograficzne — od portretów po relacje z wydarzeń. Jeśli masz pomysł na współpracę, zapraszam do kontaktu.",
+    "p1": "W swojej fotografii skupiam się na opowiedzeniu historii, detalach oraz autentyczności. W ramach fotografii kulinarnej robię zdjęcia, które nie tylko trafiają do stałych gości, ale także przyciągają uwagę nowych, budują doświadczenia, zapadają w pamięć i pobudzają zmysły.",
+    "p2": "Niezależnie od tego, czy chcesz odświeżyć menu, zadbać o profesjonalny wizerunek w mediach społecznościowych czy stworzyć spójną identyfikację wizualną - odpowiednie zdjęcia mogą realnie wesprzeć rozwój Twojego biznesu.",
+    "whyMe": "Dlaczego ja?",
+    "p3": "Łączę doświadczenie zawodowego kucharza z pracą fotografa, dlatego dobrze znam rynek gastronomiczny i rozumiem jego potrzeby. Chętnie opowiem historię Twojego miejsca poprzez fotografię kulinarną.",
+    "p4": "Jeśli masz pomysł na inny projekt - fotografię wydarzenia, portrety lub coś zupełnie innego - odezwij się. Chętnie porozmawiam o szczegółach.",
     "cta": "Skontaktuj się"
   },
   "Contact": {
     "label": "Kontakt",
     "titleLine1": "Porozmawiajmy",
     "titleLine2": "o Twoim projekcie",
-    "subtitle": "Napisz kilka słów o swoim pomyśle lub marce. Odpowiem z informacją o dostępnych terminach i możliwościach współpracy."
+    "subtitle": "Napisz kilka słów o swoim pomyśle lub restauracji. Odpowiem z informacją o dostępnych terminach i możliwościach współpracy."
   },
   "ContactForm": {
     "nameLabel": "Imię",

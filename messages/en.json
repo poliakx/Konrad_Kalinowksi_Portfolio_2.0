@@ -20,8 +20,8 @@
   },
   "Intro": {
     "label": "The work",
-    "text": "I focus on the story of the place — the details, the light, the identity of the venue. As a photographer with a chef's background, I understand what makes a dish worth remembering.",
-    "aboutLink": "About Konrad"
+    "text": "In my photography, I focus on the story of the place, the details and authenticity.",
+    "aboutLink": "About me"
   },
   "Showcase": {
     "letsWork": "Let's work together",
@@ -32,17 +32,17 @@
   "About": {
     "label": "About me",
     "subtitle": "Food Photographer · Warsaw",
-    "p1": "In my photography, I focus on the story of the place, the details and the identity of the venue - images that not only resonate with regular guests but also capture the attention of new ones. They create experiences that stay in people's memory and engage the senses.",
-    "p2": "Whether you want to improve your menu, strengthen your social media presence or build a cohesive visual identity, photography is a powerful tool that highlights your culinary skills and supports the growth of your business. I'd love to tell the story of your place through tailored food photography.",
+    "p1": "In my photography, I focus on the story of the place, the details and authenticity. Through food photography, I create images that not only resonate with regular guests but also capture the attention of new ones. They create experiences that stay in people's memory and engage the senses.",
+    "p2": "Whether you want to improve your menu, strengthen your social media presence or build a cohesive visual identity, photography is a powerful tool that can support the growth of your business.",
     "whyMe": "Why me?",
-    "p3": "Because I combine the experience of a professional chef with the work of a photographer, I truly understand the needs of restaurateurs when it comes to capturing the perfect shot.",
+    "p3": "I combine the experience of a professional chef with the perspective of a photographer, which allows me to truly understand the hospitality industry and its needs. I'd love to tell the story of your place through tailored food photography.",
     "p4": "If you want to do different project together (events, portraits), feel free to contact me and discuss the details.",
     "cta": "Get in touch"
   },
   "Contact": {
     "label": "Contact Me",
-    "titleLine1": "Let's Connect, Collaborate,",
-    "titleLine2": "and Create Together",
+    "titleLine1": "Let's",
+    "titleLine2": "Connect",
     "subtitle": "Share your project details and I'll reply with availability, timeline, and next steps."
   },
   "ContactForm": {
